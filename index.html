@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An interactive visual story about growth, composition and geography in Australia's registered healthcare workforce.">
+  <title>Australia's Healthcare Workforce | FIT3179 DV2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,650&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0/build/vega.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1/build/vega-lite.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0/build/vega-embed.min.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to the visual story</a>
+
+  <header class="hero">
+    <div class="hero__inner page-width">
+      <p class="eyebrow">FIT3179 · Data Visualisation 2</p>
+      <h1>Australia's healthcare workforce</h1>
+      <p class="hero__subtitle">Who is growing, where they work, and what it means for access to care</p>
+      <p class="hero__intro">
+        Australia has more registered health professionals than it did four years ago. But a larger national workforce does not automatically mean every profession or region benefits equally. This story follows the workforce from national growth to the state and remote-area patterns hidden underneath it.
+      </p>
+
+      <div class="kpi-grid" aria-label="Key workforce statistics">
+        <article class="kpi">
+          <p class="kpi__label">Registered and employed, 2024</p>
+          <p class="kpi__value">757,517</p>
+          <p class="kpi__detail">people across 15 registered profession groups</p>
+        </article>
+        <article class="kpi">
+          <p class="kpi__label">Growth since 2020</p>
+          <p class="kpi__value">+17.9%</p>
+          <p class="kpi__detail">115,038 more registered professionals</p>
+        </article>
+        <article class="kpi">
+          <p class="kpi__label">Largest profession</p>
+          <p class="kpi__value">54.1%</p>
+          <p class="kpi__detail">of the workforce are nurses and midwives</p>
+        </article>
+      </div>
+
+      <div class="reading-path" aria-label="Story structure">
+        <span>01 Growth</span><span aria-hidden="true">→</span>
+        <span>02 Professions</span><span aria-hidden="true">→</span>
+        <span>03 Geography</span><span aria-hidden="true">→</span>
+        <span>04 Remoteness</span>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="story-section page-width" id="growth">
+      <div class="section-heading">
+        <p class="section-number">01</p>
+        <div>
+          <p class="eyebrow">A growing workforce</p>
+          <h2>Growth is clear, but it is not evenly shared</h2>
+          <p class="section-lead">
+            The national registered workforce increased from 642,479 in 2020 to 757,517 in 2024. Nursing and midwifery dominates the workforce by size, while several allied-health professions grew faster proportionally.
+          </p>
+        </div>
+      </div>
+
+      <figure class="chart-card chart-card--feature">
+        <div class="chart-heading">
+          <div>
+            <p class="chart-kicker">Composition · Advanced idiom</p>
+            <h3>More than half of the workforce is nursing and midwifery</h3>
+            <p>Area represents the 2024 headcount. Hover over a rectangle for its exact value.</p>
+          </div>
+          <span class="chart-number">01</span>
+        </div>
+        <div id="chart01" class="chart" data-spec="specs/chart01-treemap.json" aria-label="Treemap of the 2024 healthcare workforce by profession"></div>
+        <figcaption><strong>Read this:</strong> Nurses and midwives account for 409,794 people—more than medical practitioners and all allied-health professions individually.</figcaption>
+      </figure>
+
+      <figure class="chart-card">
+        <div class="chart-heading">
+          <div>
+            <p class="chart-kicker">Change over time · Indexed line chart</p>
+            <h3>All six selected professions grew, but at different speeds</h3>
+            <p>The index places every profession at 100 in 2020, making proportional growth comparable despite very different workforce sizes.</p>
+          </div>
+          <span class="chart-number">02</span>
+        </div>
+        <div id="chart02" class="chart" data-spec="specs/chart02-indexed-lines.json" aria-label="Indexed line chart of workforce growth from 2020 to 2024"></div>
+        <figcaption><strong>Standout:</strong> Occupational therapy increased by approximately 34.2%, the fastest growth among the six professions shown.</figcaption>
+      </figure>
+
+      <figure class="chart-card">
+        <div class="chart-heading">
+          <div>
+            <p class="chart-kicker">Rank change · Advanced idiom</p>
+            <h3>Growth reshuffled the middle of the profession ranking</h3>
+            <p>Lower rank numbers indicate a larger workforce. Selected changes are highlighted while stable professions remain in context.</p>
+          </div>
+          <span class="chart-number">03</span>
+        </div>
+        <div id="chart03" class="chart" data-spec="specs/chart03-bump.json" aria-label="Bump chart of profession headcount rankings from 2020 to 2024"></div>
+        <figcaption><strong>Movement:</strong> Physiotherapy overtook psychology for third place, while occupational therapy moved ahead of dental practice.</figcaption>
+      </figure>
+    </section>
+
+    <section class="story-section story-section--tint" id="professions">
+      <div class="page-width section-inner">
+        <div class="section-heading">
+          <p class="section-number">02</p>
+          <div>
+            <p class="eyebrow">Professions are changing differently</p>
+            <h2>Headcount alone does not describe workforce pressure</h2>
+            <p class="section-lead">
+              Growth, working hours and workforce age reveal different pressures. A fast-growing workforce may still work long hours, while an older workforce can raise future replacement concerns.
+            </p>
+          </div>
+        </div>
+
+        <figure class="chart-card">
+          <div class="chart-heading">
+            <div>
+              <p class="chart-kicker">Before and after · Advanced idiom</p>
+              <h3>Occupational therapy recorded the strongest proportional rise</h3>
+              <p>Every profession starts at an index of 100 in 2020. The 2024 point shows the relative change four years later.</p>
+            </div>
+            <span class="chart-number">04</span>
+          </div>
+          <div id="chart04" class="chart" data-spec="specs/chart04-connected-dot.json" aria-label="Connected dot plot comparing 2020 and 2024 workforce indexes"></div>
+          <figcaption><strong>Contrast:</strong> Occupational therapy reached an index of 134, while Chinese medicine changed little overall and ended close to 103.</figcaption>
+        </figure>
+
+        <div class="chart-grid chart-grid--two">
+          <figure class="chart-card">
+            <div class="chart-heading">
+              <div>
+                <p class="chart-kicker">Workload · Advanced idiom</p>
+                <h3>Paramedicine reports the longest average working week</h3>
+                <p>Average total hours include clinical and non-clinical work reported in the workforce survey.</p>
+              </div>
+              <span class="chart-number">05</span>
+            </div>
+            <div id="chart05" class="chart" data-spec="specs/chart05-lollipop-hours.json" aria-label="Lollipop chart of average weekly hours by profession"></div>
+            <figcaption><strong>Pressure point:</strong> Paramedicine averages 44.9 hours per week, compared with 35.6 hours across the full registered workforce.</figcaption>
+          </figure>
+
+          <figure class="chart-card">
+            <div class="chart-heading">
+              <div>
+                <p class="chart-kicker">Three variables · Bubble chart</p>
+                <h3>Age and hours expose different workforce profiles</h3>
+                <p>Position shows average age and hours; bubble area represents profession headcount.</p>
+              </div>
+              <span class="chart-number">06</span>
+            </div>
+            <div id="chart06" class="chart" data-spec="specs/chart06-bubble-age-hours.json" aria-label="Bubble chart of age, hours and workforce size"></div>
+            <figcaption><strong>Two extremes:</strong> Chinese medicine has the oldest average age and shortest reported week, while paramedicine combines a younger workforce with the longest hours.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section page-width" id="geography">
+      <div class="section-heading">
+        <p class="section-number">03</p>
+        <div>
+          <p class="eyebrow">Geography changes the picture</p>
+          <h2>Workforce size and workforce availability tell different stories</h2>
+          <p class="section-lead">
+            New South Wales and Victoria have the largest workforces because they also have large populations. Dividing full-time-equivalent workers by population provides a fairer state comparison.
+          </p>
+        </div>
+      </div>
+
+      <aside class="definition">
+        <strong>What does FTE mean?</strong>
+        Full-time equivalent converts reported working hours into a comparable workload measure. Here, FTE per 100,000 residents is used as an availability proxy—not a direct measure of healthcare quality or unmet demand.
+      </aside>
+
+      <figure class="chart-card chart-card--feature">
+        <div class="chart-heading">
+          <div>
+            <p class="chart-kicker">Population-standardised · Advanced map 1</p>
+            <h3>Per-capita availability varies by state and profession</h3>
+            <p>Choose a profession from the dropdown. Darker colour indicates more FTE workers per 100,000 residents.</p>
+          </div>
+          <span class="chart-number">07</span>
+        </div>
+        <div id="chart07" class="chart chart--map" data-spec="specs/chart07-choropleth.json" aria-label="Choropleth map of full-time-equivalent healthcare workers per 100,000 residents"></div>
+        <figcaption><strong>All-profession view:</strong> South Australia has the highest published state rate at about 2,833 FTE per 100,000, while New South Wales has about 2,362.</figcaption>
+      </figure>
+
+      <div class="chart-grid chart-grid--two">
+        <figure class="chart-card">
+          <div class="chart-heading">
+            <div>
+              <p class="chart-kicker">Absolute capacity · Advanced map 2</p>
+              <h3>Large populations support the largest workforces</h3>
+              <p>Circle area represents headcount. Use the dropdown to examine a profession.</p>
+            </div>
+            <span class="chart-number">08</span>
+          </div>
+          <div id="chart08" class="chart chart--map" data-spec="specs/chart08-proportional-symbol-map.json" aria-label="Proportional symbol map of healthcare workforce headcount"></div>
+          <figcaption><strong>Scale:</strong> New South Wales has the largest published state workforce with 214,291 people, followed closely by Victoria.</figcaption>
+        </figure>
+
+        <figure class="chart-card">
+          <div class="chart-heading">
+            <div>
+              <p class="chart-kicker">People over land · Advanced map 3</p>
+              <h3>Resize the states by workforce instead of land area</h3>
+              <p>Circle area is headcount; colour is FTE per 100,000. Positions preserve an approximate Australian geography.</p>
+            </div>
+            <span class="chart-number">09</span>
+          </div>
+          <div id="chart09" class="chart chart--map" data-spec="specs/chart09-dorling-cartogram.json" aria-label="Dorling cartogram of Australian state healthcare workforces"></div>
+          <figcaption><strong>Why a cartogram?</strong> Western Australia's land area no longer dominates; states occupy visual space according to their workforce.</figcaption>
+        </figure>
+      </div>
+
+      <figure class="chart-card">
+        <div class="chart-heading">
+          <div>
+            <p class="chart-kicker">Profession × place · Advanced idiom</p>
+            <h3>The profession mix differs across jurisdictions</h3>
+            <p>Colour runs from lower to higher within each profession, so state differences remain visible despite very different workforce scales. Hover for the exact FTE rate.</p>
+          </div>
+          <span class="chart-number">10</span>
+        </div>
+        <div id="chart10" class="chart" data-spec="specs/chart10-heatmap.json" aria-label="Heatmap of profession-level workforce availability by state"></div>
+        <figcaption><strong>Use with care:</strong> Higher per-capita supply can reflect small populations, referral hubs or workforce location—not necessarily easier access for every resident.</figcaption>
+      </figure>
+    </section>
+
+    <section class="story-section story-section--dark" id="remoteness">
+      <div class="page-width section-inner">
+        <div class="section-heading section-heading--light">
+          <p class="section-number">04</p>
+          <div>
+            <p class="eyebrow">Beyond major cities</p>
+            <h2>Distance changes both distribution and workload</h2>
+            <p class="section-lead">
+              About three quarters of the published workforce is located in major cities. Outside those cities, workforce numbers fall sharply while average hours rise for several essential professions.
+            </p>
+          </div>
+        </div>
+
+        <figure class="chart-card chart-card--on-dark">
+          <div class="chart-heading">
+            <div>
+              <p class="chart-kicker">Composition · 100% stacked bars</p>
+              <h3>Most selected professions remain concentrated in major cities</h3>
+              <p>Each bar totals 100% and shows where members of that profession report working.</p>
+            </div>
+            <span class="chart-number">11</span>
+          </div>
+          <div id="chart11" class="chart" data-spec="specs/chart11-remoteness-share.json" aria-label="One hundred percent stacked bar chart of workforce distribution by remoteness"></div>
+          <figcaption><strong>Concentration:</strong> Major cities contain roughly three quarters of the total published workforce, but the distribution varies by profession.</figcaption>
+        </figure>
+
+        <figure class="chart-card chart-card--on-dark">
+          <div class="chart-heading">
+            <div>
+              <p class="chart-kicker">Workload by place · Grouped bars</p>
+              <h3>Paramedic hours rise sharply with remoteness</h3>
+              <p>Compare average weekly hours for three large or essential profession groups.</p>
+            </div>
+            <span class="chart-number">12</span>
+          </div>
+          <div id="chart12" class="chart" data-spec="specs/chart12-remoteness-hours.json" aria-label="Grouped bar chart comparing working hours across remoteness areas"></div>
+          <figcaption><strong>Largest difference:</strong> Paramedicine rises from 43.7 hours in major cities to 58.4 hours in very remote Australia.</figcaption>
+        </figure>
+
+        <div class="conclusion">
+          <p class="eyebrow">The central lesson</p>
+          <h2>More workers do not automatically mean equal access</h2>
+          <p>
+            Australia added more than 115,000 registered health professionals between 2020 and 2024. Yet growth differed across professions, workforce supply differed across states, and reported hours rose in remote settings. Planning therefore needs to consider profession, workload, population and geography together—not national headcount alone.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="methodology page-width" aria-labelledby="methodology-title">
+      <div>
+        <p class="eyebrow">Methods and limitations</p>
+        <h2 id="methodology-title">How to read this visualisation</h2>
+      </div>
+      <div class="methodology-grid">
+        <article>
+          <h3>Population matching</h3>
+          <p>State rates combine 2024 workforce FTE with ABS estimated resident population at 31 December 2024. Using a matching reference year avoids mixing newer population figures with older workforce figures.</p>
+        </article>
+        <article>
+          <h3>What is included</h3>
+          <p>The data describes registered professionals who reported being employed in Australia. It does not represent every healthcare worker, vacancy, service, patient outcome or level of demand.</p>
+        </article>
+        <article>
+          <h3>Missing values</h3>
+          <p>“NP” values were not published for confidentiality. They are retained as missing values and never treated as zero. Published subtotals may therefore differ slightly from visible components.</p>
+        </article>
+        <article>
+          <h3>Survey and processing</h3>
+          <p>The NHWDS combines annual Ahpra registration information with a voluntary workforce survey. The overall 2024 response rate was 94.1%, followed by imputation, geocoding and quality assurance.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="page-width footer-grid">
+      <div>
+        <p class="eyebrow">Created by</p>
+        <p class="footer-title">Kieren Antonio · Student ID 32730411</p>
+        <p>FIT3179 Data Visualisation 2 · Monash University Malaysia · October 2026</p>
+      </div>
+      <div>
+        <p class="eyebrow">Data and geographic sources</p>
+        <ul>
+          <li><a href="https://hwd.health.gov.au/resources/data/summary-all.html">Australian Government Health Workforce Data — national summary</a></li>
+          <li><a href="https://hwd.health.gov.au/resources/data/summary-state.html">Australian Government Health Workforce Data — state summary</a></li>
+          <li><a href="https://hwd.health.gov.au/resources/data/summary-remote.html">Australian Government Health Workforce Data — remoteness summary</a></li>
+          <li><a href="https://www.abs.gov.au/statistics/people/population/national-state-and-territory-population/dec-2024">Australian Bureau of Statistics — December 2024 population</a></li>
+          <li><a href="https://github.com/rowanhogan/australian-states">Australian state GeoJSON boundary source</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow">AI acknowledgement</p>
+        <p>Generative AI tools were used to assist with drafting, coding, debugging and language refinement. The author reviewed the source data, design decisions, calculations and final presentation.</p>
+      </div>
+    </div>
+  </footer>
+
+  <noscript>This page requires JavaScript to display the Vega and Vega-Lite visualisations.</noscript>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Dorling-style cartogram with states represented as circles sized by healthcare workforce headcount.",
+  "width": "container",
+  "height": 450,
+  "autosize": {"type": "fit", "contains": "padding", "resize": true},
+  "params": [
+    {
+      "name": "profession_select",
+      "value": "All professions",
+      "bind": {
+        "input": "select",
+        "name": "Profession: ",
+        "options": ["All professions","Nurses and Midwives","Medical Practitioners","Physiotherapists","Psychologists","Pharmacists","Occupational Therapists","Dental Practitioners","Paramedicine Practitioners","Medical Radiation Practitioners","Optometrists","Chiropractors","Podiatrists","Chinese Medicine Practitioners","Osteopaths","ATSI Health Practitioners"]
+      }
+    }
+  ],
+  "data": {"url": "data/state_workforce_2024.csv"},
+  "transform": [
+    {"filter": "datum.profession === profession_select"},
+    {
+      "lookup": "state",
+      "from": {
+        "data": {"url": "data/state_metadata.csv"},
+        "key": "state",
+        "fields": ["state_code", "population", "cartogram_x", "cartogram_y"]
+      }
+    },
+    {"calculate": "datum.fte / datum.population * 100000", "as": "fte_per_100k"}
+  ],
+  "layer": [
+    {
+      "mark": {"type": "circle", "opacity": 0.88, "stroke": "#f7f4ec", "strokeWidth": 2},
+      "encoding": {
+        "x": {
+          "field": "cartogram_x",
+          "type": "quantitative",
+          "axis": null,
+          "scale": {"domain": [0, 6.4]}
+        },
+        "y": {
+          "field": "cartogram_y",
+          "type": "quantitative",
+          "axis": null,
+          "scale": {"domain": [0, 6], "reverse": true}
+        },
+        "size": {
+          "field": "headcount",
+          "type": "quantitative",
+          "title": "Headcount",
+          "scale": {"type": "sqrt", "range": [180, 10500]},
+          "legend": {"orient": "bottom", "format": "~s"}
+        },
+        "color": {
+          "field": "fte_per_100k",
+          "type": "quantitative",
+          "title": "FTE per 100,000",
+          "scale": {"scheme": "tealblues", "unknown": "#d8dfdc"},
+          "legend": {"orient": "bottom", "format": ",.0f", "gradientLength": 190}
+        },
+        "tooltip": [
+          {"field": "state", "title": "State or territory"},
+          {"field": "profession", "title": "Profession"},
+          {"field": "headcount", "title": "Headcount", "format": ","},
+          {"field": "fte_per_100k", "title": "FTE per 100,000", "format": ",.0f"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "fontSize": 12, "fontWeight": 700, "color": "#ffffff"},
+      "encoding": {
+        "x": {"field": "cartogram_x", "type": "quantitative", "scale": {"domain": [0, 6.4]}},
+        "y": {"field": "cartogram_y", "type": "quantitative", "scale": {"domain": [0, 6], "reverse": true}},
+        "text": {"field": "state_code"}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "axis": {"labelFont": "DM Sans", "titleFont": "DM Sans"},
+    "legend": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 12},
+    "text": {"font": "DM Sans"}
+  }
+}

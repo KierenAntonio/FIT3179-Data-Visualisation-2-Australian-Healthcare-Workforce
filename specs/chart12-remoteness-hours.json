@@ -1,0 +1,72 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Grouped bar chart comparing average total hours for nurses, medical practitioners and paramedics across remoteness areas.",
+  "width": "container",
+  "height": 360,
+  "autosize": {"type": "fit", "contains": "padding", "resize": true},
+  "data": {"url": "data/remoteness_2024.csv"},
+  "transform": [
+    {
+      "filter": {
+        "field": "profession",
+        "oneOf": ["Nurses and Midwives", "Medical Practitioners", "Paramedicine Practitioners"]
+      }
+    }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "bar", "cornerRadiusTopLeft": 2, "cornerRadiusTopRight": 2},
+      "encoding": {
+        "x": {
+          "field": "remoteness",
+          "type": "nominal",
+          "title": null,
+          "sort": ["Major Cities", "Inner Regional", "Outer Regional", "Remote", "Very Remote"],
+          "axis": {"labelAngle": -18, "labelLimit": 110}
+        },
+        "xOffset": {"field": "profession"},
+        "y": {
+          "field": "average_hours",
+          "type": "quantitative",
+          "title": "Average total hours per week",
+          "scale": {"domain": [0, 62]},
+          "axis": {"grid": true}
+        },
+        "color": {
+          "field": "profession",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": ["Nurses and Midwives", "Medical Practitioners", "Paramedicine Practitioners"],
+            "range": ["#0b6257", "#4479a1", "#d97757"]
+          },
+          "legend": {"orient": "bottom", "columns": 3}
+        },
+        "tooltip": [
+          {"field": "profession", "title": "Profession"},
+          {"field": "remoteness", "title": "Remoteness"},
+          {"field": "average_hours", "title": "Average hours", "format": ".1f"},
+          {"field": "headcount", "title": "Headcount", "format": ","}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "dy": -7, "fontSize": 10, "fontWeight": 600, "color": "#314b47"},
+      "encoding": {
+        "x": {
+          "field": "remoteness",
+          "type": "nominal",
+          "sort": ["Major Cities", "Inner Regional", "Outer Regional", "Remote", "Very Remote"]
+        },
+        "xOffset": {"field": "profession"},
+        "y": {"field": "average_hours", "type": "quantitative", "scale": {"domain": [0, 62]}},
+        "text": {"field": "average_hours", "type": "quantitative", "format": ".1f"}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "axis": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 13, "gridColor": "#e2eae7", "domainColor": "#8ba29d"},
+    "legend": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12}
+  }
+}

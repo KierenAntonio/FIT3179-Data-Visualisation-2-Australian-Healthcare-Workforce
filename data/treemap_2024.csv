@@ -1,0 +1,17 @@
+id,parent,headcount,label
+All healthcare workers,,0,All healthcare workers
+ATSI Health Practitioners,All healthcare workers,748,ATSI health
+Chiropractors,All healthcare workers,5794,Chiropractors
+Chinese Medicine Practitioners,All healthcare workers,4124,Chinese medicine
+Dental Practitioners,All healthcare workers,24512,Dental
+Medical Practitioners,All healthcare workers,122116,Medical
+Medical Radiation Practitioners,All healthcare workers,17925,Medical radiation
+Nurses and Midwives,All healthcare workers,409794,Nurses & midwives
+Occupational Therapists,All healthcare workers,29124,Occupational therapy
+Optometrists,All healthcare workers,6523,Optometry
+Osteopaths,All healthcare workers,3158,Osteopathy
+Pharmacists,All healthcare workers,31095,Pharmacy
+Physiotherapists,All healthcare workers,38703,Physiotherapy
+Podiatrists,All healthcare workers,5543,Podiatry
+Paramedicine Practitioners,All healthcare workers,21487,Paramedicine
+Psychologists,All healthcare workers,36871,Psychology

@@ -1,0 +1,68 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Bump chart showing changes in the headcount ranking of registered health professions from 2020 to 2024.",
+  "width": "container",
+  "height": 500,
+  "autosize": {"type": "fit", "contains": "padding", "resize": true},
+  "data": {"url": "data/national_trend_2020_2024.csv"},
+  "transform": [
+    {"filter": "datum.profession !== 'Total'"},
+    {
+      "window": [{"op": "rank", "as": "rank"}],
+      "sort": [{"field": "headcount", "order": "descending"}],
+      "groupby": ["year"]
+    },
+    {
+      "calculate": "indexof(['Physiotherapists','Psychologists','Occupational Therapists','Dental Practitioners'], datum.profession) >= 0 ? datum.profession : 'Other professions'",
+      "as": "story_group"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "line", "strokeWidth": 2.5, "point": {"filled": true, "size": 48}},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal", "title": null, "axis": {"labelAngle": 0, "tickSize": 0}},
+        "y": {
+          "field": "rank",
+          "type": "quantitative",
+          "title": "Headcount rank",
+          "scale": {"domain": [15.5, 0.5]},
+          "axis": {"tickMinStep": 1, "grid": true}
+        },
+        "detail": {"field": "profession"},
+        "color": {
+          "field": "story_group",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": ["Physiotherapists", "Psychologists", "Occupational Therapists", "Dental Practitioners", "Other professions"],
+            "range": ["#d97757", "#7f6ca8", "#d0a13b", "#4479a1", "#b8c5c2"]
+          },
+          "legend": {"orient": "bottom", "columns": 3}
+        },
+        "opacity": {"condition": {"test": "datum.story_group !== 'Other professions'", "value": 1}, "value": 0.55},
+        "tooltip": [
+          {"field": "profession", "title": "Profession"},
+          {"field": "year", "title": "Year"},
+          {"field": "rank", "title": "Rank", "format": ".0f"},
+          {"field": "headcount", "title": "Headcount", "format": ","}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "datum.year === 2024"}],
+      "mark": {"type": "text", "align": "left", "dx": 8, "fontSize": 11, "fontWeight": 600},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {"field": "rank", "type": "quantitative", "scale": {"domain": [15.5, 0.5]}},
+        "text": {"field": "profession"},
+        "color": {"condition": {"test": "datum.story_group !== 'Other professions'", "value": "#173f3a"}, "value": "#64736f"}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "axis": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 13, "gridColor": "#e2eae7", "domainColor": "#8ba29d"},
+    "legend": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12}
+  }
+}

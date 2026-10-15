@@ -1,0 +1,70 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "One hundred percent stacked bar chart showing how selected large professions are distributed across remoteness areas.",
+  "width": "container",
+  "height": 350,
+  "autosize": {"type": "fit", "contains": "padding", "resize": true},
+  "data": {"url": "data/remoteness_2024.csv"},
+  "transform": [
+    {
+      "filter": {
+        "field": "profession",
+        "oneOf": [
+          "Nurses and Midwives",
+          "Medical Practitioners",
+          "Physiotherapists",
+          "Psychologists",
+          "Pharmacists",
+          "Occupational Therapists",
+          "Dental Practitioners",
+          "Paramedicine Practitioners"
+        ]
+      }
+    },
+    {"filter": "isValid(datum.headcount)"},
+    {
+      "joinaggregate": [{"op": "sum", "field": "headcount", "as": "profession_total"}],
+      "groupby": ["profession"]
+    },
+    {"calculate": "datum.headcount / datum.profession_total", "as": "share"}
+  ],
+  "mark": {"type": "bar", "height": 24},
+  "encoding": {
+    "x": {
+      "field": "share",
+      "type": "quantitative",
+      "title": "Share of profession's workforce",
+      "stack": "zero",
+      "axis": {"format": ".0%", "grid": true}
+    },
+    "y": {
+      "field": "profession",
+      "type": "nominal",
+      "title": null,
+      "sort": {"field": "profession_total", "order": "descending"},
+      "axis": {"labelLimit": 200}
+    },
+    "color": {
+      "field": "remoteness",
+      "type": "nominal",
+      "title": null,
+      "scale": {
+        "domain": ["Major Cities", "Inner Regional", "Outer Regional", "Remote", "Very Remote"],
+        "range": ["#0b6257", "#4f9789", "#89bcae", "#d0a13b", "#d97757"]
+      },
+      "legend": {"orient": "bottom", "columns": 3}
+    },
+    "order": {"field": "remoteness_order", "type": "ordinal"},
+    "tooltip": [
+      {"field": "profession", "title": "Profession"},
+      {"field": "remoteness", "title": "Remoteness"},
+      {"field": "headcount", "title": "Headcount", "format": ","},
+      {"field": "share", "title": "Share", "format": ".1%"}
+    ]
+  },
+  "config": {
+    "view": {"stroke": null},
+    "axis": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 13, "gridColor": "#e2eae7", "domainColor": "#8ba29d"},
+    "legend": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12}
+  }
+}

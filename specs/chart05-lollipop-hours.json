@@ -1,0 +1,54 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Lollipop chart ranking professions by average total weekly working hours in 2024.",
+  "width": "container",
+  "height": 500,
+  "autosize": {"type": "fit", "contains": "padding", "resize": true},
+  "data": {"url": "data/national_metrics_2024.csv"},
+  "transform": [{"filter": "datum.profession !== 'Total'"}],
+  "layer": [
+    {
+      "mark": {"type": "rule", "stroke": "#9fb5af", "strokeWidth": 3},
+      "encoding": {
+        "x": {"field": "average_hours", "type": "quantitative", "title": "Average total hours per week", "scale": {"domain": [0, 48]}},
+        "x2": {"datum": 0},
+        "y": {
+          "field": "profession",
+          "type": "nominal",
+          "title": null,
+          "sort": {"field": "average_hours", "order": "descending"},
+          "axis": {"labelLimit": 200}
+        }
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true, "size": 130, "stroke": "#f7f4ec", "strokeWidth": 1.5},
+      "encoding": {
+        "x": {"field": "average_hours", "type": "quantitative", "scale": {"domain": [0, 48]}},
+        "y": {"field": "profession", "type": "nominal", "sort": {"field": "average_hours", "order": "descending"}},
+        "color": {
+          "condition": {"test": "datum.profession === 'Paramedicine Practitioners'", "value": "#d97757"},
+          "value": "#0b6257"
+        },
+        "tooltip": [
+          {"field": "profession", "title": "Profession"},
+          {"field": "average_hours", "title": "Average hours", "format": ".1f"},
+          {"field": "headcount", "title": "Headcount", "format": ","}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "left", "dx": 9, "fontSize": 11, "fontWeight": 600},
+      "encoding": {
+        "x": {"field": "average_hours", "type": "quantitative", "scale": {"domain": [0, 48]}},
+        "y": {"field": "profession", "type": "nominal", "sort": {"field": "average_hours", "order": "descending"}},
+        "text": {"field": "average_hours", "type": "quantitative", "format": ".1f"},
+        "color": {"value": "#314b47"}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "axis": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 13, "gridColor": "#e2eae7", "domainColor": "#8ba29d"}
+  }
+}

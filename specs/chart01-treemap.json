@@ -1,0 +1,96 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Treemap of Australia's registered and employed healthcare workforce by profession in 2024.",
+  "width": 840,
+  "height": 430,
+  "background": "#fffdf7",
+  "padding": 4,
+  "autosize": {"type": "fit", "contains": "padding", "resize": true},
+  "data": [
+    {
+      "name": "tree",
+      "url": "data/treemap_2024.csv",
+      "format": {"type": "csv", "parse": {"headcount": "number"}},
+      "transform": [
+        {"type": "stratify", "key": "id", "parentKey": "parent"},
+        {
+          "type": "treemap",
+          "field": "headcount",
+          "sort": {"field": "value", "order": "descending"},
+          "round": true,
+          "method": "squarify",
+          "size": [{"signal": "width"}, {"signal": "height"}]
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "colour",
+      "type": "sqrt",
+      "domain": {"data": "tree", "field": "headcount"},
+      "range": ["#bfe3d8", "#0b6257"]
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "from": {"data": "tree"},
+      "encode": {
+        "enter": {
+          "stroke": {"value": "#f7f4ec"},
+          "strokeWidth": {"value": 3},
+          "tooltip": {
+            "signal": "datum.depth === 0 ? null : {'Profession': datum.id, 'Headcount': format(datum.headcount, ',')}"
+          }
+        },
+        "update": {
+          "x": {"field": "x0"},
+          "y": {"field": "y0"},
+          "x2": {"field": "x1"},
+          "y2": {"field": "y1"},
+          "fill": {"scale": "colour", "field": "headcount"},
+          "opacity": {"signal": "datum.depth === 0 ? 0 : 1"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "tree"},
+      "encode": {
+        "enter": {
+          "x": {"signal": "datum.x0 + 10"},
+          "y": {"signal": "datum.y0 + 22"},
+          "text": {"signal": "datum.label || ''"},
+          "font": {"value": "DM Sans, Arial, sans-serif"},
+          "fontSize": {"value": 13},
+          "fontWeight": {"value": 600},
+          "fill": {"signal": "datum.headcount > 70000 ? '#ffffff' : '#143d38'"},
+          "limit": {"signal": "max(0, datum.x1 - datum.x0 - 16)"},
+          "baseline": {"value": "top"}
+        },
+        "update": {
+          "opacity": {"signal": "datum.depth > 0 && datum.x1 - datum.x0 > 75 && datum.y1 - datum.y0 > 42 ? 1 : 0"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "tree"},
+      "encode": {
+        "enter": {
+          "x": {"signal": "datum.x0 + 10"},
+          "y": {"signal": "datum.y0 + 43"},
+          "text": {"signal": "datum.depth > 0 ? format(datum.headcount, ',') : ''"},
+          "font": {"value": "DM Sans, Arial, sans-serif"},
+          "fontSize": {"value": 12},
+          "fill": {"signal": "datum.headcount > 70000 ? '#e7f7f2' : '#355d57'"},
+          "baseline": {"value": "top"}
+        },
+        "update": {
+          "opacity": {"signal": "datum.depth > 0 && datum.x1 - datum.x0 > 85 && datum.y1 - datum.y0 > 66 ? 1 : 0"}
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Interactive proportional-symbol map of healthcare workforce headcount by Australian state and territory.",
+  "width": "container",
+  "height": 450,
+  "autosize": {"type": "fit", "contains": "padding", "resize": true},
+  "projection": {"type": "equalEarth"},
+  "params": [
+    {
+      "name": "profession_select",
+      "value": "All professions",
+      "bind": {
+        "input": "select",
+        "name": "Profession: ",
+        "options": ["All professions","Nurses and Midwives","Medical Practitioners","Physiotherapists","Psychologists","Pharmacists","Occupational Therapists","Dental Practitioners","Paramedicine Practitioners","Medical Radiation Practitioners","Optometrists","Chiropractors","Podiatrists","Chinese Medicine Practitioners","Osteopaths","ATSI Health Practitioners"]
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "data/australia-states.geojson",
+        "format": {"type": "geojson"}
+      },
+      "mark": {"type": "geoshape", "fill": "#e7eeeb", "stroke": "#78918b", "strokeWidth": 1.2}
+    },
+    {
+      "data": {"url": "data/state_workforce_2024.csv"},
+      "transform": [
+        {"filter": "datum.profession === profession_select"},
+        {
+          "lookup": "state",
+          "from": {
+            "data": {"url": "data/state_metadata.csv"},
+            "key": "state",
+            "fields": ["state_code", "population", "longitude", "latitude"]
+          }
+        }
+      ],
+      "mark": {"type": "circle", "color": "#d97757", "opacity": 0.76, "stroke": "#7d3d2a", "strokeWidth": 1.1},
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "size": {
+          "field": "headcount",
+          "type": "quantitative",
+          "title": "Headcount",
+          "scale": {"type": "sqrt", "range": [90, 6800]},
+          "legend": {"orient": "bottom", "format": "~s"}
+        },
+        "tooltip": [
+          {"field": "state", "title": "State or territory"},
+          {"field": "profession", "title": "Profession"},
+          {"field": "headcount", "title": "Headcount", "format": ","},
+          {"field": "fte", "title": "Total FTE", "format": ","}
+        ]
+      }
+    },
+    {
+      "data": {"url": "data/state_metadata.csv"},
+      "mark": {"type": "text", "font": "Arial", "fontSize": 11, "fontWeight": 700, "color": "#ffffff"},
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "text": {"field": "state_code"}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "legend": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 12},
+    "text": {"font": "DM Sans"}
+  }
+}

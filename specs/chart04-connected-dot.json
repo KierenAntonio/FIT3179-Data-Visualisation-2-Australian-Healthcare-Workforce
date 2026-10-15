@@ -1,0 +1,83 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Connected dot plot comparing each profession's indexed workforce size in 2020 and 2024.",
+  "width": "container",
+  "height": 500,
+  "autosize": {"type": "fit", "contains": "padding", "resize": true},
+  "data": {"url": "data/national_trend_2020_2024.csv"},
+  "transform": [
+    {"filter": "datum.profession !== 'Total'"},
+    {
+      "window": [{"op": "first_value", "field": "headcount", "as": "baseline"}],
+      "sort": [{"field": "year", "order": "ascending"}],
+      "groupby": ["profession"],
+      "frame": [null, null]
+    },
+    {"calculate": "datum.headcount / datum.baseline * 100", "as": "growth_index"},
+    {"filter": "datum.year === 2020 || datum.year === 2024"}
+  ],
+  "layer": [
+    {
+      "mark": {"type": "line", "stroke": "#9eb0ac", "strokeWidth": 3},
+      "encoding": {
+        "x": {
+          "field": "growth_index",
+          "type": "quantitative",
+          "title": "Workforce index (2020 = 100)",
+          "scale": {"domain": [96, 138]},
+          "axis": {"grid": true}
+        },
+        "y": {
+          "field": "profession",
+          "type": "nominal",
+          "title": null,
+          "sort": {"field": "growth_index", "op": "max", "order": "descending"},
+          "axis": {"labelLimit": 210}
+        },
+        "detail": {"field": "profession"}
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true, "size": 115, "stroke": "#f7f4ec", "strokeWidth": 1.5},
+      "encoding": {
+        "x": {"field": "growth_index", "type": "quantitative", "scale": {"domain": [96, 138]}},
+        "y": {
+          "field": "profession",
+          "type": "nominal",
+          "sort": {"field": "growth_index", "op": "max", "order": "descending"}
+        },
+        "color": {
+          "field": "year",
+          "type": "nominal",
+          "title": null,
+          "scale": {"domain": [2020, 2024], "range": ["#a4b7b2", "#d97757"]},
+          "legend": {"orient": "bottom", "symbolType": "circle"}
+        },
+        "tooltip": [
+          {"field": "profession", "title": "Profession"},
+          {"field": "year", "title": "Year"},
+          {"field": "headcount", "title": "Headcount", "format": ","},
+          {"field": "growth_index", "title": "Index", "format": ".1f"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "datum.year === 2024"}],
+      "mark": {"type": "text", "align": "left", "dx": 8, "fontSize": 11, "fontWeight": 600, "color": "#71402f"},
+      "encoding": {
+        "x": {"field": "growth_index", "type": "quantitative", "scale": {"domain": [96, 138]}},
+        "y": {
+          "field": "profession",
+          "type": "nominal",
+          "sort": {"field": "growth_index", "op": "max", "order": "descending"}
+        },
+        "text": {"field": "growth_index", "type": "quantitative", "format": ".0f"}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "axis": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 13, "gridColor": "#e1e9e6", "domainColor": "#8ba29d"},
+    "legend": {"labelFont": "DM Sans", "labelFontSize": 12}
+  }
+}
