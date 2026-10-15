@@ -4,7 +4,13 @@
   "width": "container",
   "height": 500,
   "autosize": {"type": "fit", "contains": "padding", "resize": true},
-  "data": {"url": "data/national_trend_2020_2024.csv"},
+  "data": {
+    "url": "data/national_trend_2020_2024.csv",
+    "format": {
+      "type": "csv",
+      "parse": {"year": "number", "headcount": "number"}
+    }
+  },
   "transform": [
     {"filter": "datum.profession !== 'Total'"},
     {
