@@ -45,7 +45,7 @@
         "x": {"field": "cartogram_x", "type": "quantitative", "axis": null, "scale": {"domain": [0, 7]}},
         "y": {"field": "cartogram_y", "type": "quantitative", "axis": null, "scale": {"domain": [0, 6.8], "reverse": true}},
         "size": {
-          "field": "headcount", "type": "quantitative", "title": "Headcount", "scale": {"type": "sqrt", "range": [180, 10500]},
+          "field": "headcount", "type": "quantitative", "title": "Headcount", "scale": {"type": "sqrt", "domain": [0, 220000], "range": [180, 10500], "clamp": true},
           "legend": {"orient": "bottom", "format": ",.0f", "values": [50000, 100000, 200000]}
         },
         "color": {

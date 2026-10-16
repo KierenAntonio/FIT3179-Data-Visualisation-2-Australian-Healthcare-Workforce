@@ -42,7 +42,7 @@
       }
     },
     {
-      "transform": [{"filter": {"field": "profession", "oneOf": ["Nurses and Midwives", "Medical Practitioners", "Paramedicine Practitioners"]}}],
+      "transform": [{"filter": {"field": "profession", "oneOf": ["Nurses and Midwives", "Paramedicine Practitioners"]}}],
       "mark": {"type": "text", "align": "left", "dx": 9, "fontSize": 11, "fontWeight": 700, "color": "#173f3a"},
       "encoding": {
         "x": {"field": "average_age", "type": "quantitative", "scale": {"domain": [34, 54]}},

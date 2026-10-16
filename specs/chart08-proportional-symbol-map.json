@@ -49,7 +49,7 @@
         "latitude": {"field": "latitude", "type": "quantitative"},
         "size": {
           "field": "headcount", "type": "quantitative", "title": "Headcount",
-          "scale": {"type": "sqrt", "range": [90, 6800]},
+          "scale": {"type": "sqrt", "domain": [0, 220000], "range": [90, 6800], "clamp": true},
           "legend": {"orient": "bottom", "format": ",.0f", "values": [50000, 100000, 200000]}
         },
         "tooltip": [
