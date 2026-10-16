@@ -1,21 +1,20 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Heatmap comparing profession-level full-time-equivalent workforce per 100,000 residents across Australian states and territories.",
+  "description": "Heatmap comparing each profession's relative full-time-equivalent workforce availability across Australian states and territories, with actual rates printed in every published cell.",
   "width": "container",
-  "height": 500,
+  "height": 540,
   "autosize": {"type": "fit", "contains": "padding", "resize": true},
-  "data": {"url": "data/state_workforce_2024.csv"},
+  "data": {
+    "url": "data/state_workforce_2024.csv",
+    "format": {"type": "csv", "parse": {"fte": "number"}}
+  },
   "transform": [
     {"filter": "datum.profession !== 'All professions'"},
     {
       "lookup": "state",
-      "from": {
-        "data": {"url": "data/state_metadata.csv"},
-        "key": "state",
-        "fields": ["state_code", "population"]
-      }
+      "from": {"data": {"url": "data/state_metadata.csv"}, "key": "state", "fields": ["population"]}
     },
-    {"calculate": "datum.fte / datum.population * 100000", "as": "fte_per_100k"},
+    {"calculate": "datum.fte > 0 ? datum.fte / datum.population * 100000 : null", "as": "fte_per_100k"},
     {
       "joinaggregate": [
         {"op": "min", "field": "fte_per_100k", "as": "profession_min"},
@@ -24,65 +23,76 @@
       "groupby": ["profession"]
     },
     {
-      "calculate": "(datum.fte_per_100k - datum.profession_min) / (datum.profession_max - datum.profession_min)",
+      "calculate": "isValid(datum.fte_per_100k) ? (datum.fte_per_100k - datum.profession_min) / (datum.profession_max - datum.profession_min) : null",
       "as": "relative_position"
     }
   ],
-  "mark": {"type": "rect", "stroke": "#f7f4ec", "strokeWidth": 1.5},
   "encoding": {
     "x": {
-      "field": "state_code",
-      "type": "nominal",
-      "title": null,
-      "sort": ["NSW", "VIC", "QLD", "SA", "WA", "TAS", "ACT", "NT"],
-      "axis": {"labelAngle": 0, "orient": "top", "tickSize": 0}
-    },
-    "y": {
-      "field": "profession",
-      "type": "nominal",
-      "title": null,
-      "sort": [
-        "Nurses and Midwives",
-        "Medical Practitioners",
-        "Physiotherapists",
-        "Psychologists",
-        "Pharmacists",
-        "Occupational Therapists",
-        "Dental Practitioners",
-        "Paramedicine Practitioners",
-        "Medical Radiation Practitioners",
-        "Optometrists",
-        "Chiropractors",
-        "Podiatrists",
-        "Chinese Medicine Practitioners",
-        "Osteopaths",
-        "ATSI Health Practitioners"
-      ],
-      "axis": {"labelLimit": 215, "tickSize": 0}
-    },
-    "color": {
-      "field": "relative_position",
-      "type": "quantitative",
-      "title": "Within-profession position",
-      "scale": {"scheme": "tealblues", "domain": [0, 1], "unknown": "#d8dfdc"},
-      "legend": {
-        "orient": "bottom",
-        "direction": "horizontal",
-        "gradientLength": 250,
-        "values": [0, 1],
-        "labelExpr": "datum.value === 0 ? 'Lower' : 'Higher'"
+      "field": "state", "type": "nominal", "title": null,
+      "sort": ["New South Wales", "Victoria", "Queensland", "South Australia", "Western Australia", "Tasmania", "Australian Capital Territory", "Northern Territory"],
+      "axis": {
+        "labelAngle": 0,
+        "orient": "top",
+        "tickSize": 0,
+        "labelLimit": 160,
+        "labelLineHeight": 14,
+        "labelPadding": 22,
+        "labelExpr": "datum.label === 'New South Wales' ? ['New', 'South', 'Wales'] : datum.label === 'South Australia' ? ['South', 'Australia'] : datum.label === 'Western Australia' ? ['Western', 'Australia'] : datum.label === 'Australian Capital Territory' ? ['Australian', 'Capital', 'Territory'] : datum.label === 'Northern Territory' ? ['Northern', 'Territory'] : datum.label"
       }
     },
-    "tooltip": [
-      {"field": "profession", "title": "Profession"},
-      {"field": "state", "title": "State or territory"},
-      {"field": "fte", "title": "Total FTE", "format": ","},
-      {"field": "fte_per_100k", "title": "FTE per 100,000", "format": ".1f"}
-    ]
+    "y": {
+      "field": "profession", "type": "nominal", "title": null,
+      "sort": [
+        "Nurses and Midwives", "Medical Practitioners", "Physiotherapists", "Psychologists", "Pharmacists",
+        "Occupational Therapists", "Dental Practitioners", "Paramedicine Practitioners", "Medical Radiation Practitioners",
+        "Optometrists", "Chiropractors", "Podiatrists", "Chinese Medicine Practitioners", "Osteopaths",
+        "Aboriginal and Torres Strait Islander Health Practitioners"
+      ],
+      "axis": {
+        "labelLimit": 360,
+        "labelLineHeight": 15,
+        "tickSize": 0,
+        "labelExpr": "datum.label === 'Aboriginal and Torres Strait Islander Health Practitioners' ? ['Aboriginal and Torres Strait Islander', 'Health Practitioners'] : datum.label"
+      }
+    }
   },
+  "layer": [
+    {
+      "mark": {"type": "rect", "stroke": "#fffdf7", "strokeWidth": 1.5},
+      "encoding": {
+        "color": {
+          "field": "relative_position", "type": "quantitative", "title": "Relative availability within row",
+          "scale": {"scheme": "tealblues", "domain": [0, 1], "unknown": "#d8dfdc"},
+          "legend": {
+            "orient": "bottom", "direction": "horizontal", "gradientLength": 250, "values": [0, 1],
+            "labelExpr": "datum.value === 0 ? 'Lowest in row' : 'Highest in row'"
+          }
+        },
+        "tooltip": [
+          {"field": "profession", "title": "Profession"}, {"field": "state", "title": "State or territory"},
+          {"field": "fte", "title": "Total full-time equivalent", "format": ","},
+          {"field": "fte_per_100k", "title": "Full-time-equivalent workers per 100,000 residents", "format": ".1f"}
+        ]
+      }
+    },
+    {
+      "transform": [{"filter": "isValid(datum.fte_per_100k)"}],
+      "mark": {"type": "text", "fontSize": 10.5, "fontWeight": 700},
+      "encoding": {
+        "text": {"field": "fte_per_100k", "type": "quantitative", "format": ".1f"},
+        "color": {"condition": {"test": "datum.relative_position >= 0.58", "value": "#ffffff"}, "value": "#173f3a"}
+      }
+    },
+    {
+      "transform": [{"filter": "!isValid(datum.fte_per_100k)"}],
+      "mark": {"type": "text", "fontSize": 9.5, "fontStyle": "italic", "color": "#526a65", "lineBreak": "\n", "lineHeight": 11},
+      "encoding": {"text": {"value": "Not\npublished"}}
+    }
+  ],
   "config": {
     "view": {"stroke": null},
-    "axis": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 13, "domain": false},
-    "legend": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 12}
+    "axis": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 11.5, "titleFontSize": 13, "domain": false},
+    "legend": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 12, "titleLimit": 360}
   }
 }

@@ -2,20 +2,20 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Indexed workforce growth for six major and fast-growing registered health professions, 2020 to 2024.",
   "width": "container",
-  "height": 330,
+  "height": 360,
+  "padding": {"left": 5, "right": 220, "top": 8, "bottom": 5},
   "autosize": {"type": "fit", "contains": "padding", "resize": true},
-  "data": {"url": "data/national_trend_2020_2024.csv"},
+  "data": {
+    "url": "data/national_trend_2020_2024.csv",
+    "format": {"type": "csv", "parse": {"year": "number", "headcount": "number"}}
+  },
   "transform": [
     {
       "filter": {
         "field": "profession",
         "oneOf": [
-          "Nurses and Midwives",
-          "Medical Practitioners",
-          "Physiotherapists",
-          "Psychologists",
-          "Occupational Therapists",
-          "Paramedicine Practitioners"
+          "Nurses and Midwives", "Medical Practitioners", "Physiotherapists", "Psychologists",
+          "Occupational Therapists", "Paramedicine Practitioners"
         ]
       }
     },
@@ -27,58 +27,60 @@
     },
     {"calculate": "datum.headcount / datum.baseline * 100", "as": "growth_index"}
   ],
-  "params": [
+  "layer": [
     {
-      "name": "profession_highlight",
-      "select": {"type": "point", "fields": ["profession"], "on": "mouseover", "clear": "mouseout"}
+      "params": [
+        {"name": "profession_highlight", "select": {"type": "point", "fields": ["profession"], "on": "mouseover", "clear": "mouseout"}}
+      ],
+      "mark": {"type": "line", "point": {"filled": true, "size": 55}, "strokeWidth": 2.7},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal", "title": null, "axis": {"labelAngle": 0, "tickSize": 0}},
+        "y": {
+          "field": "growth_index", "type": "quantitative", "title": "Growth index (2020 = 100)",
+          "scale": {"domain": [95, 138]}, "axis": {"grid": true, "format": ".0f"}
+        },
+        "detail": {"field": "profession"},
+        "color": {
+          "field": "profession", "type": "nominal", "legend": null,
+          "scale": {
+            "domain": ["Nurses and Midwives", "Medical Practitioners", "Physiotherapists", "Psychologists", "Occupational Therapists", "Paramedicine Practitioners"],
+            "range": ["#0b6257", "#4479a1", "#d97757", "#7f6ca8", "#d0a13b", "#b6533c"]
+          }
+        },
+        "opacity": {"condition": {"param": "profession_highlight", "value": 1}, "value": 0.72},
+        "tooltip": [
+          {"field": "profession", "type": "nominal", "title": "Profession"},
+          {"field": "year", "type": "ordinal", "title": "Year"},
+          {"field": "headcount", "type": "quantitative", "title": "Headcount", "format": ","},
+          {"field": "growth_index", "type": "quantitative", "title": "Index", "format": ".1f"}
+        ]
+      }
+    },
+    {
+      "transform": [
+        {"filter": "datum.year === 2024"},
+        {
+          "calculate": "datum.profession === 'Medical Practitioners' ? datum.growth_index - 1.4 : datum.profession === 'Nurses and Midwives' ? datum.growth_index + 1.4 : datum.growth_index",
+          "as": "label_position"
+        }
+      ],
+      "mark": {"type": "text", "align": "left", "dx": 9, "fontSize": 11, "fontWeight": 700},
+      "encoding": {
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {"field": "label_position", "type": "quantitative", "scale": {"domain": [95, 138]}},
+        "text": {"field": "profession"},
+        "color": {
+          "field": "profession", "type": "nominal", "legend": null,
+          "scale": {
+            "domain": ["Nurses and Midwives", "Medical Practitioners", "Physiotherapists", "Psychologists", "Occupational Therapists", "Paramedicine Practitioners"],
+            "range": ["#0b6257", "#4479a1", "#d97757", "#7f6ca8", "#d0a13b", "#b6533c"]
+          }
+        }
+      }
     }
   ],
-  "mark": {"type": "line", "point": {"filled": true, "size": 55}, "strokeWidth": 2.6},
-  "encoding": {
-    "x": {
-      "field": "year",
-      "type": "ordinal",
-      "title": null,
-      "axis": {"labelAngle": 0, "tickSize": 0}
-    },
-    "y": {
-      "field": "growth_index",
-      "type": "quantitative",
-      "title": "Growth index (2020 = 100)",
-      "scale": {"domain": [95, 138]},
-      "axis": {"grid": true, "format": ".0f"}
-    },
-    "color": {
-      "field": "profession",
-      "type": "nominal",
-      "title": null,
-      "scale": {
-        "domain": [
-          "Nurses and Midwives",
-          "Medical Practitioners",
-          "Physiotherapists",
-          "Psychologists",
-          "Occupational Therapists",
-          "Paramedicine Practitioners"
-        ],
-        "range": ["#0b6257", "#3d8f82", "#d97757", "#7f6ca8", "#d0a13b", "#4479a1"]
-      },
-      "legend": {"orient": "bottom", "columns": 2, "labelLimit": 220}
-    },
-    "opacity": {
-      "condition": {"param": "profession_highlight", "value": 1},
-      "value": 0.68
-    },
-    "tooltip": [
-      {"field": "profession", "type": "nominal", "title": "Profession"},
-      {"field": "year", "type": "ordinal", "title": "Year"},
-      {"field": "headcount", "type": "quantitative", "title": "Headcount", "format": ","},
-      {"field": "growth_index", "type": "quantitative", "title": "Index", "format": ".1f"}
-    ]
-  },
   "config": {
     "view": {"stroke": null},
-    "axis": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 13, "gridColor": "#dce6e2", "domainColor": "#8ba29d"},
-    "legend": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12}
+    "axis": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 13, "gridColor": "#dce6e2", "domainColor": "#8ba29d"}
   }
 }

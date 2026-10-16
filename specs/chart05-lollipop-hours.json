@@ -17,7 +17,11 @@
           "type": "nominal",
           "title": null,
           "sort": {"field": "average_hours", "order": "descending"},
-          "axis": {"labelLimit": 200}
+          "axis": {
+            "labelLimit": 360,
+            "labelLineHeight": 15,
+            "labelExpr": "datum.label === 'Aboriginal and Torres Strait Islander Health Practitioners' ? ['Aboriginal and Torres Strait Islander', 'Health Practitioners'] : datum.label"
+          }
         }
       }
     },
@@ -27,7 +31,7 @@
         "x": {"field": "average_hours", "type": "quantitative", "scale": {"domain": [0, 48]}},
         "y": {"field": "profession", "type": "nominal", "sort": {"field": "average_hours", "order": "descending"}},
         "color": {
-          "condition": {"test": "datum.profession === 'Paramedicine Practitioners'", "value": "#d97757"},
+          "condition": {"test": "datum.profession === 'Paramedicine Practitioners'", "value": "#b6533c"},
           "value": "#0b6257"
         },
         "tooltip": [

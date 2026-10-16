@@ -1,17 +1,23 @@
-id,parent,headcount,label
-All healthcare workers,,0,All healthcare workers
-ATSI Health Practitioners,All healthcare workers,748,ATSI health
-Chiropractors,All healthcare workers,5794,Chiropractors
-Chinese Medicine Practitioners,All healthcare workers,4124,Chinese medicine
-Dental Practitioners,All healthcare workers,24512,Dental
-Medical Practitioners,All healthcare workers,122116,Medical
-Medical Radiation Practitioners,All healthcare workers,17925,Medical radiation
-Nurses and Midwives,All healthcare workers,409794,Nurses & midwives
-Occupational Therapists,All healthcare workers,29124,Occupational therapy
-Optometrists,All healthcare workers,6523,Optometry
-Osteopaths,All healthcare workers,3158,Osteopathy
-Pharmacists,All healthcare workers,31095,Pharmacy
-Physiotherapists,All healthcare workers,38703,Physiotherapy
-Podiatrists,All healthcare workers,5543,Podiatry
-Paramedicine Practitioners,All healthcare workers,21487,Paramedicine
-Psychologists,All healthcare workers,36871,Psychology
+id,parent,headcount,label,category,group_total
+All healthcare workers,,0,All healthcare workers,All healthcare workers,757517
+Nursing and midwifery,All healthcare workers,0,Nursing and midwifery,Nursing and midwifery,409794
+Nurses and Midwives,Nursing and midwifery,409794,Nurses and midwives,Nursing and midwifery,
+Medicine,All healthcare workers,0,Medicine,Medicine,122116
+Medical Practitioners,Medicine,122116,Medical practitioners,Medicine,
+Allied health,All healthcare workers,0,Allied health,Allied health,178860
+Chiropractors,Allied health,5794,Chiropractors,Allied health,
+Chinese Medicine Practitioners,Allied health,4124,Chinese medicine practitioners,Allied health,
+Medical Radiation Practitioners,Allied health,17925,Medical radiation practitioners,Allied health,
+Occupational Therapists,Allied health,29124,Occupational therapists,Allied health,
+Optometrists,Allied health,6523,Optometrists,Allied health,
+Osteopaths,Allied health,3158,Osteopaths,Allied health,
+Pharmacists,Allied health,31095,Pharmacists,Allied health,
+Physiotherapists,Allied health,38703,Physiotherapists,Allied health,
+Podiatrists,Allied health,5543,Podiatrists,Allied health,
+Psychologists,Allied health,36871,Psychologists,Allied health,
+Oral health,All healthcare workers,0,Oral health,Oral health,24512
+Dental Practitioners,Oral health,24512,Dental practitioners,Oral health,
+Paramedicine,All healthcare workers,0,Paramedicine,Paramedicine,21487
+Paramedicine Practitioners,Paramedicine,21487,Paramedicine practitioners,Paramedicine,
+First Nations health,All healthcare workers,0,First Nations health,First Nations health,748
+Aboriginal and Torres Strait Islander Health Practitioners,First Nations health,748,Aboriginal and Torres Strait Islander health practitioners,First Nations health,

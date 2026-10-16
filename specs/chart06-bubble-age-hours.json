@@ -2,58 +2,66 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Bubble chart comparing average age, average total hours and workforce headcount by profession in 2024.",
   "width": "container",
-  "height": 410,
+  "height": 430,
+  "padding": {"left": 5, "right": 175, "top": 5, "bottom": 5},
   "autosize": {"type": "fit", "contains": "padding", "resize": true},
-  "data": {"url": "data/national_metrics_2024.csv"},
+  "data": {
+    "url": "data/national_metrics_2024.csv",
+    "format": {"type": "csv", "parse": {"headcount": "number", "average_age": "number", "average_hours": "number"}}
+  },
   "transform": [
     {"filter": "datum.profession !== 'Total'"},
     {
-      "calculate": "datum.profession === 'Nurses and Midwives' ? 'Nursing & midwifery' : datum.profession === 'Medical Practitioners' ? 'Medical' : datum.profession === 'Paramedicine Practitioners' ? 'Paramedicine' : datum.profession === 'ATSI Health Practitioners' ? 'First Nations health' : 'Allied health'",
+      "calculate": "datum.profession === 'Nurses and Midwives' ? 'Nursing and midwifery' : datum.profession === 'Medical Practitioners' ? 'Medical practice' : datum.profession === 'Paramedicine Practitioners' ? 'Paramedicine' : datum.profession === 'Aboriginal and Torres Strait Islander Health Practitioners' ? 'First Nations health' : 'Allied and oral health'",
       "as": "profession_group"
     }
   ],
-  "mark": {"type": "circle", "opacity": 0.82, "stroke": "#f7f4ec", "strokeWidth": 1.5},
-  "encoding": {
-    "x": {
-      "field": "average_age",
-      "type": "quantitative",
-      "title": "Average age (years)",
-      "scale": {"domain": [34, 54]},
-      "axis": {"grid": true}
+  "layer": [
+    {
+      "mark": {"type": "circle", "opacity": 0.82, "stroke": "#f7f4ec", "strokeWidth": 1.5},
+      "encoding": {
+        "x": {"field": "average_age", "type": "quantitative", "title": "Average age (years)", "scale": {"domain": [34, 54]}, "axis": {"grid": true}},
+        "y": {"field": "average_hours", "type": "quantitative", "title": "Average total hours per week", "scale": {"domain": [27, 47]}, "axis": {"grid": true}},
+        "size": {
+          "field": "headcount", "type": "quantitative", "title": "2024 headcount", "scale": {"range": [70, 2300]},
+          "legend": {"orient": "bottom", "format": ",.0f", "values": [100000, 200000, 300000, 400000]}
+        },
+        "color": {
+          "field": "profession_group", "type": "nominal", "title": "Profession group",
+          "scale": {
+            "domain": ["Nursing and midwifery", "Medical practice", "Paramedicine", "First Nations health", "Allied and oral health"],
+            "range": ["#0b6257", "#4479a1", "#b6533c", "#d0a13b", "#77a99e"]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {"field": "profession", "title": "Profession"}, {"field": "headcount", "title": "Headcount", "format": ","},
+          {"field": "average_age", "title": "Average age", "format": ".1f"}, {"field": "average_hours", "title": "Average hours", "format": ".1f"}
+        ]
+      }
     },
-    "y": {
-      "field": "average_hours",
-      "type": "quantitative",
-      "title": "Average total hours per week",
-      "scale": {"domain": [27, 47]},
-      "axis": {"grid": true}
+    {
+      "transform": [{"filter": {"field": "profession", "oneOf": ["Nurses and Midwives", "Medical Practitioners", "Paramedicine Practitioners"]}}],
+      "mark": {"type": "text", "align": "left", "dx": 9, "fontSize": 11, "fontWeight": 700, "color": "#173f3a"},
+      "encoding": {
+        "x": {"field": "average_age", "type": "quantitative", "scale": {"domain": [34, 54]}},
+        "y": {"field": "average_hours", "type": "quantitative", "scale": {"domain": [27, 47]}},
+        "text": {"field": "profession"}
+      }
     },
-    "size": {
-      "field": "headcount",
-      "type": "quantitative",
-      "title": "2024 headcount",
-      "scale": {"range": [70, 2300]}
-    },
-    "color": {
-      "field": "profession_group",
-      "type": "nominal",
-      "title": null,
-      "scale": {
-        "domain": ["Nursing & midwifery", "Medical", "Paramedicine", "First Nations health", "Allied health"],
-        "range": ["#0b6257", "#4479a1", "#d97757", "#d0a13b", "#77a99e"]
-      },
-      "legend": {"orient": "bottom", "columns": 3}
-    },
-    "tooltip": [
-      {"field": "profession", "title": "Profession"},
-      {"field": "headcount", "title": "Headcount", "format": ","},
-      {"field": "average_age", "title": "Average age", "format": ".1f"},
-      {"field": "average_hours", "title": "Average hours", "format": ".1f"}
-    ]
-  },
+    {
+      "transform": [{"filter": "datum.profession === 'Chinese Medicine Practitioners'"}],
+      "mark": {"type": "text", "align": "right", "dx": -9, "fontSize": 11, "fontWeight": 700, "color": "#173f3a"},
+      "encoding": {
+        "x": {"field": "average_age", "type": "quantitative", "scale": {"domain": [34, 54]}},
+        "y": {"field": "average_hours", "type": "quantitative", "scale": {"domain": [27, 47]}},
+        "text": {"field": "profession"}
+      }
+    }
+  ],
   "config": {
     "view": {"stroke": null},
     "axis": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 13, "gridColor": "#e2eae7", "domainColor": "#8ba29d"},
-    "legend": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12}
+    "legend": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 12}
   }
 }

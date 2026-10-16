@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="An interactive visual story about growth, composition and geography in Australia's registered healthcare workforce.">
-  <title>Australia's Healthcare Workforce | FIT3179 DV2</title>
+  <title>Australia's Healthcare Workforce | FIT3179 Data Visualisation 2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,650&display=swap" rel="stylesheet">
@@ -70,7 +70,7 @@
           <div>
             <p class="chart-kicker">Composition · Advanced idiom</p>
             <h3>More than half of the workforce is nursing and midwifery</h3>
-            <p>Area represents the 2024 headcount. Hover over a rectangle for its exact value.</p>
+            <p>Profession groups form the first level; individual professions form the second. Only the largest professions are labelled, while every value remains available on hover.</p>
           </div>
           <span class="chart-number">01</span>
         </div>
@@ -95,13 +95,13 @@
         <div class="chart-heading">
           <div>
             <p class="chart-kicker">Rank change · Advanced idiom</p>
-            <h3>Growth reshuffled the middle of the profession ranking</h3>
-            <p>Lower rank numbers indicate a larger workforce. Selected changes are highlighted while stable professions remain in context.</p>
+            <h3>Physiotherapy moved into third place</h3>
+            <p>Lower rank numbers indicate a larger workforce. Physiotherapy and psychology are highlighted while the other professions remain in context.</p>
           </div>
           <span class="chart-number">03</span>
         </div>
         <div id="chart03" class="chart" data-spec="specs/chart03-bump.json" aria-label="Bump chart of profession headcount rankings from 2020 to 2024"></div>
-        <figcaption><strong>Movement:</strong> Physiotherapy overtook psychology for third place, while occupational therapy moved ahead of dental practice.</figcaption>
+        <figcaption><strong>Movement:</strong> Physiotherapy rose from fourth to third and overtook psychology; the other thirteen professions kept the same rank.</figcaption>
       </figure>
     </section>
 
@@ -150,10 +150,17 @@
               <div>
                 <p class="chart-kicker">Three variables · Bubble chart</p>
                 <h3>Age and hours expose different workforce profiles</h3>
-                <p>Position shows average age and hours; bubble area represents profession headcount.</p>
+                <p>Position shows average age and hours; bubble area represents headcount and colour identifies a broad profession group. Labels identify the largest workforce and key outliers.</p>
               </div>
               <span class="chart-number">06</span>
             </div>
+            <ul class="chart-legend" aria-label="Bubble chart profession groups">
+              <li><span class="chart-legend__swatch chart-legend__swatch--nursing" aria-hidden="true"></span>Nursing and midwifery</li>
+              <li><span class="chart-legend__swatch chart-legend__swatch--medical" aria-hidden="true"></span>Medical practice</li>
+              <li><span class="chart-legend__swatch chart-legend__swatch--paramedicine" aria-hidden="true"></span>Paramedicine</li>
+              <li><span class="chart-legend__swatch chart-legend__swatch--first-nations" aria-hidden="true"></span>First Nations health</li>
+              <li><span class="chart-legend__swatch chart-legend__swatch--allied" aria-hidden="true"></span>Allied and oral health</li>
+            </ul>
             <div id="chart06" class="chart" data-spec="specs/chart06-bubble-age-hours.json" aria-label="Bubble chart of age, hours and workforce size"></div>
             <figcaption><strong>Two extremes:</strong> Chinese medicine has the oldest average age and shortest reported week, while paramedicine combines a younger workforce with the longest hours.</figcaption>
           </figure>
@@ -174,8 +181,8 @@
       </div>
 
       <aside class="definition">
-        <strong>What does FTE mean?</strong>
-        Full-time equivalent converts reported working hours into a comparable workload measure. Here, FTE per 100,000 residents is used as an availability proxy—not a direct measure of healthcare quality or unmet demand.
+        <strong>What does full-time equivalent mean?</strong>
+        Full-time equivalent converts reported working hours into a comparable workload measure. Here, full-time-equivalent workers per 100,000 residents is used as an availability proxy—not a direct measure of healthcare quality or unmet demand.
       </aside>
 
       <figure class="chart-card chart-card--feature">
@@ -183,12 +190,12 @@
           <div>
             <p class="chart-kicker">Population-standardised · Advanced map 1</p>
             <h3>Per-capita availability varies by state and profession</h3>
-            <p>Choose a profession from the dropdown. Darker colour indicates more FTE workers per 100,000 residents.</p>
+            <p>Choose a profession from the dropdown. Darker colour indicates more full-time-equivalent workers per 100,000 residents; hover to identify each jurisdiction.</p>
           </div>
           <span class="chart-number">07</span>
         </div>
         <div id="chart07" class="chart chart--map" data-spec="specs/chart07-choropleth.json" aria-label="Choropleth map of full-time-equivalent healthcare workers per 100,000 residents"></div>
-        <figcaption><strong>All-profession view:</strong> South Australia has the highest published state rate at about 2,833 FTE per 100,000, while New South Wales has about 2,362.</figcaption>
+        <figcaption><strong>All-profession view:</strong> South Australia has the highest published state rate at about 2,833 full-time-equivalent workers per 100,000 residents, while New South Wales has about 2,362.</figcaption>
       </figure>
 
       <div class="chart-grid chart-grid--two">
@@ -197,7 +204,7 @@
             <div>
               <p class="chart-kicker">Absolute capacity · Advanced map 2</p>
               <h3>Large populations support the largest workforces</h3>
-              <p>Circle area represents headcount. Use the dropdown to examine a profession.</p>
+              <p>Circle area represents headcount. Use the dropdown to examine a profession and hover to identify each jurisdiction.</p>
             </div>
             <span class="chart-number">08</span>
           </div>
@@ -209,8 +216,8 @@
           <div class="chart-heading">
             <div>
               <p class="chart-kicker">People over land · Advanced map 3</p>
-              <h3>Resize the states by workforce instead of land area</h3>
-              <p>Circle area is headcount; colour is FTE per 100,000. Positions preserve an approximate Australian geography.</p>
+              <h3>Resize jurisdictions by workforce instead of land area</h3>
+              <p>Circle area is headcount; colour is full-time-equivalent workers per 100,000 residents. Full jurisdiction names replace abbreviations.</p>
             </div>
             <span class="chart-number">09</span>
           </div>
@@ -223,8 +230,8 @@
         <div class="chart-heading">
           <div>
             <p class="chart-kicker">Profession × place · Advanced idiom</p>
-            <h3>The profession mix differs across jurisdictions</h3>
-            <p>Colour runs from lower to higher within each profession, so state differences remain visible despite very different workforce scales. Hover for the exact FTE rate.</p>
+            <h3>Availability varies within every profession</h3>
+            <p>Colour compares jurisdictions within each profession, not between different rows. Each cell prints the actual number of full-time-equivalent workers per 100,000 residents.</p>
           </div>
           <span class="chart-number">10</span>
         </div>
@@ -290,7 +297,7 @@
       <div class="methodology-grid">
         <article>
           <h3>Population matching</h3>
-          <p>State rates combine 2024 workforce FTE with ABS estimated resident population at 31 December 2024. Using a matching reference year avoids mixing newer population figures with older workforce figures.</p>
+          <p>State rates combine 2024 workforce full-time-equivalent counts with Australian Bureau of Statistics estimated resident population at 31 December 2024. Using a matching reference year avoids mixing newer population figures with older workforce figures.</p>
         </article>
         <article>
           <h3>What is included</h3>
@@ -298,11 +305,11 @@
         </article>
         <article>
           <h3>Missing values</h3>
-          <p>“NP” values were not published for confidentiality. They are retained as missing values and never treated as zero. Published subtotals may therefore differ slightly from visible components.</p>
+          <p>Values withheld for confidentiality are retained as missing values and never treated as zero. Published subtotals may therefore differ slightly from visible components.</p>
         </article>
         <article>
           <h3>Survey and processing</h3>
-          <p>The NHWDS combines annual Ahpra registration information with a voluntary workforce survey. The overall 2024 response rate was 94.1%, followed by imputation, geocoding and quality assurance.</p>
+          <p>The National Health Workforce Dataset combines annual Australian Health Practitioner Regulation Agency registration information with a voluntary workforce survey. The overall 2024 response rate was 94.1%, followed by imputation, geocoding and quality assurance.</p>
         </article>
       </div>
     </section>
@@ -312,7 +319,7 @@
     <div class="page-width footer-grid">
       <div>
         <p class="eyebrow">Created by</p>
-        <p class="footer-title">Kieren Antonio · Student ID 32730411</p>
+        <p class="footer-title">Kieren Antonio · Student number 32730411</p>
         <p>FIT3179 Data Visualisation 2 · Monash University Malaysia · October 2026</p>
       </div>
       <div>
@@ -326,8 +333,8 @@
         </ul>
       </div>
       <div>
-        <p class="eyebrow">AI acknowledgement</p>
-        <p>Generative AI tools were used to assist with drafting, coding, debugging and language refinement. The author reviewed the source data, design decisions, calculations and final presentation.</p>
+        <p class="eyebrow">Generative artificial intelligence acknowledgement</p>
+        <p>Generative artificial intelligence tools were used to assist with drafting, coding, debugging and language refinement. The author reviewed the source data, design decisions, calculations and final presentation.</p>
       </div>
     </div>
   </footer>

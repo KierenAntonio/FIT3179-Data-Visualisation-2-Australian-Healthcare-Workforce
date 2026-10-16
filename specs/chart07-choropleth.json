@@ -28,7 +28,7 @@
           "Podiatrists",
           "Chinese Medicine Practitioners",
           "Osteopaths",
-          "ATSI Health Practitioners"
+          "Aboriginal and Torres Strait Islander Health Practitioners"
         ]
       }
     }
@@ -64,49 +64,32 @@
               "Podiatrists",
               "Chinese Medicine Practitioners",
               "Osteopaths",
-              "ATSI Health Practitioners"
+              "Aboriginal and Torres Strait Islander Health Practitioners"
             ]
           }
         },
-        {"calculate": "datum[profession_select]", "as": "fte_per_100k"}
+        {"calculate": "datum[profession_select] > 0 ? datum[profession_select] : null", "as": "fte_per_100k"}
       ],
       "mark": {"type": "geoshape", "stroke": "#f7f4ec", "strokeWidth": 1.6},
       "encoding": {
         "color": {
           "field": "fte_per_100k",
           "type": "quantitative",
-          "title": "FTE per 100,000",
+          "title": "Workers per 100,000 residents",
           "scale": {"scheme": "tealblues", "unknown": "#d8dfdc"},
           "legend": {"orient": "bottom", "direction": "horizontal", "gradientLength": 250, "format": ",.0f"}
         },
         "tooltip": [
           {"field": "state", "title": "State or territory"},
-          {"field": "fte_per_100k", "title": "FTE per 100,000", "format": ",.1f"},
+          {"field": "fte_per_100k", "title": "Full-time-equivalent workers per 100,000 residents", "format": ",.1f"},
           {"field": "population", "title": "2024 population", "format": ","}
         ]
-      }
-    },
-    {
-      "data": {"url": "data/state_metadata.csv"},
-      "mark": {
-        "type": "text",
-        "font": "Arial",
-        "fontSize": 11,
-        "fontWeight": 700,
-        "color": "#fffdf7",
-        "stroke": "#173f3a",
-        "strokeWidth": 0.8
-      },
-      "encoding": {
-        "longitude": {"field": "longitude", "type": "quantitative"},
-        "latitude": {"field": "latitude", "type": "quantitative"},
-        "text": {"field": "state_code"}
       }
     }
   ],
   "config": {
     "view": {"stroke": null},
-    "legend": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 12},
+    "legend": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 12, "titleLimit": 360},
     "text": {"font": "DM Sans"}
   }
 }

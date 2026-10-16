@@ -1,5 +1,5 @@
 remoteness,remoteness_order,profession,headcount,fte,average_age,average_hours
-Major Cities,1,ATSI Health Practitioners,159,168,43.2,40.0
+Major Cities,1,Aboriginal and Torres Strait Islander Health Practitioners,159,168,43.2,40.0
 Major Cities,1,Chiropractors,4391,3714,41.8,32.1
 Major Cities,1,Chinese Medicine Practitioners,3526,2697,52.1,29.1
 Major Cities,1,Dental Practitioners,19685,17674,42.5,34.1
@@ -15,7 +15,7 @@ Major Cities,1,Podiatrists,4267,4024,39.6,35.8
 Major Cities,1,Paramedicine Practitioners,13126,15110,36.7,43.7
 Major Cities,1,Psychologists,30654,25653,45.3,31.8
 Major Cities,1,Total,571283,528708,41.7,35.5
-Inner Regional,2,ATSI Health Practitioners,156,155,43.0,37.7
+Inner Regional,2,Aboriginal and Torres Strait Islander Health Practitioners,156,155,43.0,37.7
 Inner Regional,2,Chiropractors,1035,854,43.2,31.3
 Inner Regional,2,Chinese Medicine Practitioners,477,349,50.9,27.8
 Inner Regional,2,Dental Practitioners,3447,3203,41.2,35.3
@@ -31,7 +31,7 @@ Inner Regional,2,Podiatrists,949,891,40.1,35.7
 Inner Regional,2,Paramedicine Practitioners,5241,6126,38.7,44.4
 Inner Regional,2,Psychologists,4586,3742,48.8,31.0
 Inner Regional,2,Total,125282,114951,43.4,35.2
-Outer Regional,3,ATSI Health Practitioners,213,223,46.4,39.7
+Outer Regional,3,Aboriginal and Torres Strait Islander Health Practitioners,213,223,46.4,39.7
 Outer Regional,3,Chiropractors,310,262,43.8,32.1
 Outer Regional,3,Chinese Medicine Practitioners,107,81,55.1,28.7
 Outer Regional,3,Dental Practitioners,1208,1116,42.3,35.1
@@ -47,7 +47,7 @@ Outer Regional,3,Podiatrists,272,266,41.6,37.2
 Outer Regional,3,Paramedicine Practitioners,2412,3083,38.7,48.6
 Outer Regional,3,Psychologists,1397,1186,47.9,32.3
 Outer Regional,3,Total,49074,46879,43.3,36.7
-Remote,4,ATSI Health Practitioners,102,115,45.0,42.8
+Remote,4,Aboriginal and Torres Strait Islander Health Practitioners,102,115,45.0,42.8
 Remote,4,Chiropractors,39,32,38.7,30.9
 Remote,4,Chinese Medicine Practitioners,,6,47.7,22.1
 Remote,4,Dental Practitioners,117,109,42.0,35.4
@@ -63,7 +63,7 @@ Remote,4,Podiatrists,41,40,36.4,37.0
 Remote,4,Paramedicine Practitioners,395,570,39.7,54.8
 Remote,4,Psychologists,149,131,45.1,33.3
 Remote,4,Total,6925,7043,42.7,39.0
-Very Remote,5,ATSI Health Practitioners,110,123,46.9,42.5
+Very Remote,5,Aboriginal and Torres Strait Islander Health Practitioners,110,123,46.9,42.5
 Very Remote,5,Chiropractors,14,11,39.8,29.3
 Very Remote,5,Chinese Medicine Practitioners,,,41.0,20.0
 Very Remote,5,Dental Practitioners,32,30,47.3,36.2

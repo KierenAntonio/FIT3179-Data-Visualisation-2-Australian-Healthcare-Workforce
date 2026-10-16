@@ -38,7 +38,11 @@
           "type": "nominal",
           "title": null,
           "sort": {"field": "growth_index", "op": "max", "order": "descending"},
-          "axis": {"labelLimit": 210}
+          "axis": {
+            "labelLimit": 360,
+            "labelLineHeight": 15,
+            "labelExpr": "datum.label === 'Aboriginal and Torres Strait Islander Health Practitioners' ? ['Aboriginal and Torres Strait Islander', 'Health Practitioners'] : datum.label"
+          }
         },
         "detail": {"field": "profession"}
       }

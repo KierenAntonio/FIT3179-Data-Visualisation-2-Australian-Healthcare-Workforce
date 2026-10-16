@@ -317,6 +317,37 @@ h3 {
   line-height: 1;
 }
 
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.15rem;
+  margin: 0.25rem 0 0.85rem;
+  padding: 0;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  list-style: none;
+}
+
+.chart-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.chart-legend__swatch {
+  width: 0.72rem;
+  height: 0.72rem;
+  flex: 0 0 auto;
+  border: 1px solid rgba(23, 63, 58, 0.12);
+  border-radius: 50%;
+}
+
+.chart-legend__swatch--nursing { background: #0b6257; }
+.chart-legend__swatch--medical { background: #4479a1; }
+.chart-legend__swatch--paramedicine { background: #b6533c; }
+.chart-legend__swatch--first-nations { background: #d0a13b; }
+.chart-legend__swatch--allied { background: #77a99e; }
+
 .chart {
   width: 100%;
   min-height: 220px;

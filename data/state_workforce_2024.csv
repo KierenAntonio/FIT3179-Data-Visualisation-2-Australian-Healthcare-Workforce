@@ -1,5 +1,5 @@
 state,profession,headcount,fte,average_age,average_hours
-New South Wales,ATSI Health Practitioners,203,199,42.2,37.3
+New South Wales,Aboriginal and Torres Strait Islander Health Practitioners,203,199,42.2,37.3
 New South Wales,Chiropractors,1966,1738,41.8,33.6
 New South Wales,Chinese Medicine Practitioners,1628,1227,53.9,28.6
 New South Wales,Dental Practitioners,7388,6790,43.4,34.9
@@ -15,7 +15,7 @@ New South Wales,Podiatrists,1578,1504,40.3,36.2
 New South Wales,Paramedicine Practitioners,5850,6866,37.5,44.6
 New South Wales,Psychologists,11848,9872,46.2,31.7
 New South Wales,All professions,214291,201809,42.6,36.2
-Victoria,ATSI Health Practitioners,39,38,40.7,37.2
+Victoria,Aboriginal and Torres Strait Islander Health Practitioners,39,38,40.7,37.2
 Victoria,Chiropractors,1444,1170,42.5,30.8
 Victoria,Chinese Medicine Practitioners,1192,902,49.8,28.7
 Victoria,Dental Practitioners,6105,5497,41.7,34.2
@@ -31,7 +31,7 @@ Victoria,Podiatrists,1672,1546,39.0,35.1
 Victoria,Paramedicine Practitioners,5575,6336,37.1,43.2
 Victoria,Psychologists,10434,8621,45.5,31.4
 Victoria,All professions,203662,185348,41.5,34.9
-Queensland,ATSI Health Practitioners,140,154,48.5,41.9
+Queensland,Aboriginal and Torres Strait Islander Health Practitioners,140,154,48.5,41.9
 Queensland,Chiropractors,1000,859,44.3,32.6
 Queensland,Chinese Medicine Practitioners,774,601,51.7,29.5
 Queensland,Dental Practitioners,5128,4696,41.6,34.8
@@ -47,7 +47,7 @@ Queensland,Podiatrists,998,989,39.6,37.7
 Queensland,Paramedicine Practitioners,5608,6659,37.7,45.1
 Queensland,Psychologists,6971,5961,45.8,32.5
 Queensland,All professions,160359,150132,42.1,35.9
-South Australia,ATSI Health Practitioners,78,88,44.8,42.7
+South Australia,Aboriginal and Torres Strait Islander Health Practitioners,78,88,44.8,42.7
 South Australia,Chiropractors,373,299,46.6,30.5
 South Australia,Chinese Medicine Practitioners,189,140,50.1,28.2
 South Australia,Dental Practitioners,1990,1725,41.7,32.9
@@ -63,7 +63,7 @@ South Australia,Podiatrists,536,498,39.4,35.3
 South Australia,Paramedicine Practitioners,1518,1817,37.4,45.5
 South Australia,Psychologists,1811,1504,45.9,31.5
 South Australia,All professions,59198,53588,42.3,34.7
-Western Australia,ATSI Health Practitioners,130,145,44.4,42.4
+Western Australia,Aboriginal and Torres Strait Islander Health Practitioners,130,145,44.4,42.4
 Western Australia,Chiropractors,853,674,37.7,30.0
 Western Australia,Chinese Medicine Practitioners,230,181,52.0,29.9
 Western Australia,Dental Practitioners,2897,2513,42.3,33.0
@@ -79,7 +79,7 @@ Western Australia,Podiatrists,541,483,41.0,33.9
 Western Australia,Paramedicine Practitioners,1801,2336,39.0,49.3
 Western Australia,Psychologists,3972,3266,46.0,31.2
 Western Australia,All professions,80602,74518,42.1,35.5
-Tasmania,ATSI Health Practitioners,,,42.8,36.8
+Tasmania,Aboriginal and Torres Strait Islander Health Practitioners,,,42.8,36.8
 Tasmania,Chiropractors,71,61,44.1,32.6
 Tasmania,Chinese Medicine Practitioners,43,32,49.7,28.7
 Tasmania,Dental Practitioners,421,389,42.6,35.1
@@ -95,7 +95,7 @@ Tasmania,Podiatrists,112,108,42.0,36.8
 Tasmania,Paramedicine Practitioners,604,696,38.6,43.8
 Tasmania,Psychologists,653,541,45.9,31.5
 Tasmania,All professions,17353,16123,43.0,35.7
-Australian Capital Territory,ATSI Health Practitioners,,,,
+Australian Capital Territory,Aboriginal and Torres Strait Islander Health Practitioners,,,,
 Australian Capital Territory,Chiropractors,57,51,46.5,34.0
 Australian Capital Territory,Chinese Medicine Practitioners,56,42,54.3,28.4
 Australian Capital Territory,Dental Practitioners,428,398,43.1,35.4
@@ -111,7 +111,7 @@ Australian Capital Territory,Podiatrists,76,74,38.8,37.1
 Australian Capital Territory,Paramedicine Practitioners,297,354,36.9,45.3
 Australian Capital Territory,Psychologists,952,818,45.3,32.7
 Australian Capital Territory,All professions,13930,13335,41.1,36.8
-Northern Territory,ATSI Health Practitioners,145,153,46.7,40.2
+Northern Territory,Aboriginal and Torres Strait Islander Health Practitioners,145,153,46.7,40.2
 Northern Territory,Chiropractors,25,21,39.9,32.1
 Northern Territory,Chinese Medicine Practitioners,11,8,53.4,27.8
 Northern Territory,Dental Practitioners,132,126,41.7,36.2

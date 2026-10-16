@@ -1,16 +1,16 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "Treemap of Australia's registered and employed healthcare workforce by profession in 2024.",
-  "width": 840,
-  "height": 430,
+  "description": "Hierarchical treemap of Australia's registered and employed healthcare workforce by profession group and profession in 2024.",
+  "width": 1100,
+  "height": 500,
   "background": "#fffdf7",
   "padding": 4,
-  "autosize": {"type": "fit", "contains": "padding", "resize": true},
+  "autosize": {"type": "none", "contains": "padding", "resize": false},
   "data": [
     {
       "name": "tree",
       "url": "data/treemap_2024.csv",
-      "format": {"type": "csv", "parse": {"headcount": "number"}},
+      "format": {"type": "csv", "parse": {"headcount": "number", "group_total": "number"}},
       "transform": [
         {"type": "stratify", "key": "id", "parentKey": "parent"},
         {
@@ -19,77 +19,106 @@
           "sort": {"field": "value", "order": "descending"},
           "round": true,
           "method": "squarify",
+          "paddingInner": 3,
+          "paddingOuter": 4,
+          "paddingTop": 28,
           "size": [{"signal": "width"}, {"signal": "height"}]
         }
       ]
+    },
+    {
+      "name": "groups",
+      "source": "tree",
+      "transform": [{"type": "filter", "expr": "datum.depth === 1"}]
+    },
+    {
+      "name": "leaves",
+      "source": "tree",
+      "transform": [{"type": "filter", "expr": "datum.depth === 2"}]
+    },
+    {
+      "name": "large_leaves",
+      "source": "tree",
+      "transform": [{"type": "filter", "expr": "datum.depth === 2 && datum.headcount >= 20000"}]
     }
   ],
   "scales": [
     {
-      "name": "colour",
-      "type": "sqrt",
-      "domain": {"data": "tree", "field": "headcount"},
-      "range": ["#bfe3d8", "#0b6257"]
+      "name": "group_colour",
+      "type": "ordinal",
+      "domain": ["Nursing and midwifery", "Medicine", "Allied health", "Oral health", "Paramedicine", "First Nations health"],
+      "range": ["#0b6257", "#4479a1", "#5b8f84", "#2f8a8f", "#b6533c", "#d0a13b"]
     }
   ],
   "marks": [
     {
       "type": "rect",
-      "from": {"data": "tree"},
+      "from": {"data": "groups"},
       "encode": {
         "enter": {
-          "stroke": {"value": "#f7f4ec"},
-          "strokeWidth": {"value": 3},
-          "tooltip": {
-            "signal": "datum.depth === 0 ? null : {'Profession': datum.id, 'Headcount': format(datum.headcount, ',')}"
-          }
-        },
-        "update": {
-          "x": {"field": "x0"},
-          "y": {"field": "y0"},
-          "x2": {"field": "x1"},
-          "y2": {"field": "y1"},
-          "fill": {"scale": "colour", "field": "headcount"},
-          "opacity": {"signal": "datum.depth === 0 ? 0 : 1"}
+          "x": {"field": "x0"}, "y": {"field": "y0"}, "x2": {"field": "x1"}, "y2": {"field": "y1"},
+          "fill": {"value": "#eef3f0"}, "stroke": {"value": "#fffdf7"}, "strokeWidth": {"value": 4},
+          "tooltip": {"signal": "{'Profession group': datum.id, 'Combined headcount': format(datum.group_total, ',')}"}
         }
       }
     },
     {
-      "type": "text",
-      "from": {"data": "tree"},
+      "type": "rect",
+      "from": {"data": "leaves"},
       "encode": {
         "enter": {
-          "x": {"signal": "datum.x0 + 10"},
-          "y": {"signal": "datum.y0 + 22"},
-          "text": {"signal": "datum.label || ''"},
-          "font": {"value": "DM Sans, Arial, sans-serif"},
-          "fontSize": {"value": 13},
-          "fontWeight": {"value": 600},
-          "fill": {"signal": "datum.headcount > 70000 ? '#ffffff' : '#143d38'"},
-          "limit": {"signal": "max(0, datum.x1 - datum.x0 - 16)"},
-          "baseline": {"value": "top"}
+          "x": {"field": "x0"}, "y": {"field": "y0"}, "x2": {"field": "x1"}, "y2": {"field": "y1"},
+          "stroke": {"value": "#fffdf7"}, "strokeWidth": {"value": 1.5},
+          "fill": {"scale": "group_colour", "field": "category"},
+          "tooltip": {"signal": "{'Profession': datum.id, 'Headcount': format(datum.headcount, ',')}"}
         },
-        "update": {
-          "opacity": {"signal": "datum.depth > 0 && datum.x1 - datum.x0 > 75 && datum.y1 - datum.y0 > 42 ? 1 : 0"}
-        }
+        "update": {"opacity": {"value": 0.94}},
+        "hover": {"opacity": {"value": 1}, "strokeWidth": {"value": 3}}
       }
     },
     {
       "type": "text",
-      "from": {"data": "tree"},
+      "from": {"data": "groups"},
+      "encode": {
+        "enter": {
+          "x": {"signal": "datum.x1 - datum.x0 < 80 ? (datum.x0 + datum.x1) / 2 : datum.x0 + 9"},
+          "y": {"signal": "datum.x1 - datum.x0 < 80 ? datum.y1 - 10 : datum.y0 + 8"},
+          "text": {"field": "label"},
+          "font": {"value": "DM Sans, Arial, sans-serif"}, "fontSize": {"value": 12}, "fontWeight": {"value": 700},
+          "fill": {"value": "#173f3a"},
+          "angle": {"signal": "datum.x1 - datum.x0 < 80 ? -90 : 0"},
+          "baseline": {"signal": "datum.x1 - datum.x0 < 80 ? 'middle' : 'top'"},
+          "align": {"value": "left"}
+        },
+        "update": {"opacity": {"signal": "datum.x1 - datum.x0 > 80 || (datum.x1 - datum.x0 > 30 && datum.y1 - datum.y0 > 115) ? 1 : 0"}}
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "large_leaves"},
+      "encode": {
+        "enter": {
+          "x": {"signal": "datum.x0 + 10"}, "y": {"signal": "datum.y0 + 10"},
+          "text": {"signal": "datum.id === 'Medical Practitioners' ? 'Medical\\npractitioners' : datum.id === 'Occupational Therapists' ? 'Occupational\\ntherapists' : datum.label"},
+          "font": {"value": "DM Sans, Arial, sans-serif"}, "fontSize": {"value": 12.5}, "fontWeight": {"value": 700},
+          "fill": {"signal": "datum.category === 'First Nations health' ? '#173f3a' : '#ffffff'"},
+          "lineBreak": {"value": "\n"}, "lineHeight": {"value": 16}, "baseline": {"value": "top"}
+        },
+        "update": {"opacity": {"signal": "datum.x1 - datum.x0 > 95 && datum.y1 - datum.y0 > 70 ? 1 : 0"}}
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "large_leaves"},
       "encode": {
         "enter": {
           "x": {"signal": "datum.x0 + 10"},
-          "y": {"signal": "datum.y0 + 43"},
-          "text": {"signal": "datum.depth > 0 ? format(datum.headcount, ',') : ''"},
-          "font": {"value": "DM Sans, Arial, sans-serif"},
-          "fontSize": {"value": 12},
-          "fill": {"signal": "datum.headcount > 70000 ? '#e7f7f2' : '#355d57'"},
-          "baseline": {"value": "top"}
+          "y": {"signal": "datum.y0 + (datum.id === 'Medical Practitioners' || datum.id === 'Occupational Therapists' ? 48 : 31)"},
+          "text": {"signal": "format(datum.headcount, ',')"},
+          "font": {"value": "DM Sans, Arial, sans-serif"}, "fontSize": {"value": 11.5},
+          "fill": {"signal": "datum.category === 'First Nations health' ? '#355d57' : '#e8f4f0'"}, "baseline": {"value": "top"}
         },
-        "update": {
-          "opacity": {"signal": "datum.depth > 0 && datum.x1 - datum.x0 > 85 && datum.y1 - datum.y0 > 66 ? 1 : 0"}
-        }
+        "update": {"opacity": {"signal": "datum.x1 - datum.x0 > 95 && datum.y1 - datum.y0 > 82 ? 1 : 0"}}
       }
     }
   ]

@@ -22,7 +22,7 @@
           "type": "nominal",
           "title": null,
           "sort": ["Major Cities", "Inner Regional", "Outer Regional", "Remote", "Very Remote"],
-          "axis": {"labelAngle": -18, "labelLimit": 110}
+          "axis": {"labelAngle": 0, "labelLimit": 170}
         },
         "xOffset": {"field": "profession"},
         "y": {
@@ -38,9 +38,9 @@
           "title": null,
           "scale": {
             "domain": ["Nurses and Midwives", "Medical Practitioners", "Paramedicine Practitioners"],
-            "range": ["#0b6257", "#4479a1", "#d97757"]
+            "range": ["#0b6257", "#4479a1", "#b6533c"]
           },
-          "legend": {"orient": "bottom", "columns": 3}
+          "legend": {"orient": "bottom", "columns": 3, "labelLimit": 250}
         },
         "tooltip": [
           {"field": "profession", "title": "Profession"},

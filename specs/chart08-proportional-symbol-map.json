@@ -12,7 +12,7 @@
       "bind": {
         "input": "select",
         "name": "Profession: ",
-        "options": ["All professions","Nurses and Midwives","Medical Practitioners","Physiotherapists","Psychologists","Pharmacists","Occupational Therapists","Dental Practitioners","Paramedicine Practitioners","Medical Radiation Practitioners","Optometrists","Chiropractors","Podiatrists","Chinese Medicine Practitioners","Osteopaths","ATSI Health Practitioners"]
+        "options": ["All professions","Nurses and Midwives","Medical Practitioners","Physiotherapists","Psychologists","Pharmacists","Occupational Therapists","Dental Practitioners","Paramedicine Practitioners","Medical Radiation Practitioners","Optometrists","Chiropractors","Podiatrists","Chinese Medicine Practitioners","Osteopaths","Aboriginal and Torres Strait Islander Health Practitioners"]
       }
     }
   ],
@@ -33,7 +33,7 @@
           "from": {
             "data": {"url": "data/state_metadata.csv"},
             "key": "state",
-            "fields": ["state_code", "population", "longitude", "latitude"]
+            "fields": ["population", "longitude", "latitude"]
           }
         }
       ],
@@ -46,23 +46,14 @@
           "type": "quantitative",
           "title": "Headcount",
           "scale": {"type": "sqrt", "range": [90, 6800]},
-          "legend": {"orient": "bottom", "format": "~s"}
+          "legend": {"orient": "bottom", "format": ",.0f", "values": [50000, 100000, 200000]}
         },
         "tooltip": [
           {"field": "state", "title": "State or territory"},
           {"field": "profession", "title": "Profession"},
           {"field": "headcount", "title": "Headcount", "format": ","},
-          {"field": "fte", "title": "Total FTE", "format": ","}
+          {"field": "fte", "title": "Total full-time equivalent", "format": ","}
         ]
-      }
-    },
-    {
-      "data": {"url": "data/state_metadata.csv"},
-      "mark": {"type": "text", "font": "Arial", "fontSize": 11, "fontWeight": 700, "color": "#ffffff"},
-      "encoding": {
-        "longitude": {"field": "longitude", "type": "quantitative"},
-        "latitude": {"field": "latitude", "type": "quantitative"},
-        "text": {"field": "state_code"}
       }
     }
   ],

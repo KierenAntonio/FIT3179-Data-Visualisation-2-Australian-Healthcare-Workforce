@@ -28,7 +28,7 @@
     },
     {"calculate": "datum.headcount / datum.profession_total", "as": "share"}
   ],
-  "mark": {"type": "bar", "height": 24},
+  "mark": {"type": "bar", "height": 24, "stroke": "#fffdf7", "strokeWidth": 1},
   "encoding": {
     "x": {
       "field": "share",
@@ -42,7 +42,7 @@
       "type": "nominal",
       "title": null,
       "sort": {"field": "profession_total", "order": "descending"},
-      "axis": {"labelLimit": 200}
+      "axis": {"labelLimit": 310}
     },
     "color": {
       "field": "remoteness",
@@ -50,7 +50,7 @@
       "title": null,
       "scale": {
         "domain": ["Major Cities", "Inner Regional", "Outer Regional", "Remote", "Very Remote"],
-        "range": ["#0b6257", "#4f9789", "#89bcae", "#d0a13b", "#d97757"]
+        "range": ["#cfe3dd", "#9bc7bc", "#5f9f92", "#2f776c", "#0b4f47"]
       },
       "legend": {"orient": "bottom", "columns": 3}
     },

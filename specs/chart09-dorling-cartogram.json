@@ -1,84 +1,76 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Dorling-style cartogram with states represented as circles sized by healthcare workforce headcount.",
+  "description": "Dorling-style cartogram with states and territories represented as circles sized by healthcare workforce headcount.",
   "width": "container",
-  "height": 450,
+  "height": 480,
   "autosize": {"type": "fit", "contains": "padding", "resize": true},
   "params": [
     {
       "name": "profession_select",
       "value": "All professions",
       "bind": {
-        "input": "select",
-        "name": "Profession: ",
-        "options": ["All professions","Nurses and Midwives","Medical Practitioners","Physiotherapists","Psychologists","Pharmacists","Occupational Therapists","Dental Practitioners","Paramedicine Practitioners","Medical Radiation Practitioners","Optometrists","Chiropractors","Podiatrists","Chinese Medicine Practitioners","Osteopaths","ATSI Health Practitioners"]
+        "input": "select", "name": "Profession: ",
+        "options": ["All professions","Nurses and Midwives","Medical Practitioners","Physiotherapists","Psychologists","Pharmacists","Occupational Therapists","Dental Practitioners","Paramedicine Practitioners","Medical Radiation Practitioners","Optometrists","Chiropractors","Podiatrists","Chinese Medicine Practitioners","Osteopaths","Aboriginal and Torres Strait Islander Health Practitioners"]
       }
     }
   ],
-  "data": {"url": "data/state_workforce_2024.csv"},
+  "data": {
+    "url": "data/state_workforce_2024.csv",
+    "format": {"type": "csv", "parse": {"headcount": "number", "fte": "number"}}
+  },
   "transform": [
     {"filter": "datum.profession === profession_select"},
     {
       "lookup": "state",
       "from": {
-        "data": {"url": "data/state_metadata.csv"},
-        "key": "state",
-        "fields": ["state_code", "population", "cartogram_x", "cartogram_y"]
+        "data": {"url": "data/state_metadata.csv"}, "key": "state",
+        "fields": ["population", "cartogram_x", "cartogram_y", "label_x", "label_y"]
       }
     },
-    {"calculate": "datum.fte / datum.population * 100000", "as": "fte_per_100k"}
+    {"calculate": "datum.fte > 0 ? datum.fte / datum.population * 100000 : null", "as": "fte_per_100k"}
   ],
   "layer": [
     {
-      "mark": {"type": "circle", "opacity": 0.88, "stroke": "#f7f4ec", "strokeWidth": 2},
+      "mark": {"type": "circle", "opacity": 0.88, "stroke": "#fffdf7", "strokeWidth": 2},
       "encoding": {
-        "x": {
-          "field": "cartogram_x",
-          "type": "quantitative",
-          "axis": null,
-          "scale": {"domain": [0, 6.4]}
-        },
-        "y": {
-          "field": "cartogram_y",
-          "type": "quantitative",
-          "axis": null,
-          "scale": {"domain": [0, 6], "reverse": true}
-        },
+        "x": {"field": "cartogram_x", "type": "quantitative", "axis": null, "scale": {"domain": [0, 7]}},
+        "y": {"field": "cartogram_y", "type": "quantitative", "axis": null, "scale": {"domain": [0, 6.8], "reverse": true}},
         "size": {
-          "field": "headcount",
-          "type": "quantitative",
-          "title": "Headcount",
-          "scale": {"type": "sqrt", "range": [180, 10500]},
-          "legend": {"orient": "bottom", "format": "~s"}
+          "field": "headcount", "type": "quantitative", "title": "Headcount", "scale": {"type": "sqrt", "range": [180, 10500]},
+          "legend": {"orient": "bottom", "format": ",.0f", "values": [50000, 100000, 200000]}
         },
         "color": {
-          "field": "fte_per_100k",
-          "type": "quantitative",
-          "title": "FTE per 100,000",
+          "field": "fte_per_100k", "type": "quantitative", "title": "Workers per 100,000 residents",
           "scale": {"scheme": "tealblues", "unknown": "#d8dfdc"},
           "legend": {"orient": "bottom", "format": ",.0f", "gradientLength": 190}
         },
         "tooltip": [
-          {"field": "state", "title": "State or territory"},
-          {"field": "profession", "title": "Profession"},
+          {"field": "state", "title": "State or territory"}, {"field": "profession", "title": "Profession"},
           {"field": "headcount", "title": "Headcount", "format": ","},
-          {"field": "fte_per_100k", "title": "FTE per 100,000", "format": ",.0f"}
+          {"field": "fte_per_100k", "title": "Full-time-equivalent workers per 100,000 residents", "format": ",.0f"}
         ]
       }
     },
     {
-      "mark": {"type": "text", "fontSize": 12, "fontWeight": 700, "color": "#ffffff"},
+      "mark": {"type": "text", "fontSize": 10.5, "fontWeight": 700, "color": "#173f3a", "stroke": "#fffdf7", "strokeWidth": 3.2},
       "encoding": {
-        "x": {"field": "cartogram_x", "type": "quantitative", "scale": {"domain": [0, 6.4]}},
-        "y": {"field": "cartogram_y", "type": "quantitative", "scale": {"domain": [0, 6], "reverse": true}},
-        "text": {"field": "state_code"}
+        "x": {"field": "label_x", "type": "quantitative", "scale": {"domain": [0, 7]}},
+        "y": {"field": "label_y", "type": "quantitative", "scale": {"domain": [0, 6.8], "reverse": true}},
+        "text": {"field": "state"}
+      }
+    },
+    {
+      "mark": {"type": "text", "fontSize": 10.5, "fontWeight": 700, "color": "#173f3a"},
+      "encoding": {
+        "x": {"field": "label_x", "type": "quantitative", "scale": {"domain": [0, 7]}},
+        "y": {"field": "label_y", "type": "quantitative", "scale": {"domain": [0, 6.8], "reverse": true}},
+        "text": {"field": "state"}
       }
     }
   ],
   "config": {
     "view": {"stroke": null},
-    "axis": {"labelFont": "DM Sans", "titleFont": "DM Sans"},
-    "legend": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 12},
+    "legend": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 12, "titleLimit": 360},
     "text": {"font": "DM Sans"}
   }
 }
