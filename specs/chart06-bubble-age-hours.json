@@ -18,22 +18,23 @@
   ],
   "layer": [
     {
-      "mark": {"type": "circle", "opacity": 0.82, "stroke": "#f7f4ec", "strokeWidth": 1.5},
+      "mark": {"type": "circle", "opacity": 0.78, "stroke": "#f7f4ec", "strokeWidth": 1.8},
       "encoding": {
         "x": {"field": "average_age", "type": "quantitative", "title": "Average age (years)", "scale": {"domain": [34, 54]}, "axis": {"grid": true}},
         "y": {"field": "average_hours", "type": "quantitative", "title": "Average total hours per week", "scale": {"domain": [27, 47]}, "axis": {"grid": true}},
         "size": {
-          "field": "headcount", "type": "quantitative", "title": "2024 headcount", "scale": {"range": [70, 2300]},
+          "field": "headcount", "type": "quantitative", "title": "2024 headcount", "scale": {"range": [65, 1900]},
           "legend": {"orient": "bottom", "format": ",.0f", "values": [100000, 200000, 300000, 400000]}
         },
         "color": {
           "field": "profession_group", "type": "nominal", "title": "Profession group",
           "scale": {
             "domain": ["Nursing and midwifery", "Medical practice", "Paramedicine", "First Nations health", "Allied and oral health"],
-            "range": ["#0b6257", "#4479a1", "#b6533c", "#d0a13b", "#77a99e"]
+            "range": ["#0072b2", "#e69f00", "#cc79a7", "#4d4d4d", "#009e73"]
           },
           "legend": null
         },
+        "order": {"field": "headcount", "type": "quantitative", "sort": "descending"},
         "tooltip": [
           {"field": "profession", "title": "Profession"}, {"field": "headcount", "title": "Headcount", "format": ","},
           {"field": "average_age", "title": "Average age", "format": ".1f"}, {"field": "average_hours", "title": "Average hours", "format": ".1f"}

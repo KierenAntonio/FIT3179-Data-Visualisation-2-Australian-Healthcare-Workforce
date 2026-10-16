@@ -44,7 +44,7 @@
           "field": "profession", "type": "nominal", "legend": null,
           "scale": {
             "domain": ["Nurses and Midwives", "Medical Practitioners", "Physiotherapists", "Psychologists", "Occupational Therapists", "Paramedicine Practitioners"],
-            "range": ["#0b6257", "#4479a1", "#d97757", "#7f6ca8", "#d0a13b", "#b6533c"]
+            "range": ["#0072b2", "#e69f00", "#009e73", "#3a8dca", "#d55e00", "#cc79a7"]
           }
         },
         "opacity": {"condition": {"param": "profession_highlight", "value": 1}, "value": 0.72},
@@ -60,7 +60,7 @@
       "transform": [
         {"filter": "datum.year === 2024"},
         {
-          "calculate": "datum.profession === 'Medical Practitioners' ? datum.growth_index - 1.4 : datum.profession === 'Nurses and Midwives' ? datum.growth_index + 1.4 : datum.growth_index",
+          "calculate": "datum.profession === 'Physiotherapists' ? datum.growth_index + 0.8 : datum.profession === 'Paramedicine Practitioners' ? datum.growth_index - 0.8 : datum.profession === 'Nurses and Midwives' ? datum.growth_index + 1.8 : datum.profession === 'Medical Practitioners' ? datum.growth_index - 1.8 : datum.growth_index",
           "as": "label_position"
         }
       ],
@@ -73,7 +73,7 @@
           "field": "profession", "type": "nominal", "legend": null,
           "scale": {
             "domain": ["Nurses and Midwives", "Medical Practitioners", "Physiotherapists", "Psychologists", "Occupational Therapists", "Paramedicine Practitioners"],
-            "range": ["#0b6257", "#4479a1", "#d97757", "#7f6ca8", "#d0a13b", "#b6533c"]
+            "range": ["#0072b2", "#e69f00", "#009e73", "#3a8dca", "#d55e00", "#cc79a7"]
           }
         }
       }

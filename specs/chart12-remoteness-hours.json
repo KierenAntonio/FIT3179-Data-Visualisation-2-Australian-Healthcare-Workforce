@@ -38,7 +38,7 @@
           "title": null,
           "scale": {
             "domain": ["Nurses and Midwives", "Medical Practitioners", "Paramedicine Practitioners"],
-            "range": ["#0b6257", "#4479a1", "#b6533c"]
+            "range": ["#0072b2", "#e69f00", "#cc79a7"]
           },
           "legend": {"orient": "bottom", "columns": 3, "labelLimit": 250}
         },

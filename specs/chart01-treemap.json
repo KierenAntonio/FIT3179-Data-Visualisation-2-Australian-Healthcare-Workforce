@@ -18,7 +18,7 @@
           "field": "headcount",
           "sort": {"field": "value", "order": "descending"},
           "round": true,
-          "method": "squarify",
+          "method": "binary",
           "paddingInner": 3,
           "paddingOuter": 4,
           "paddingTop": 28,
@@ -46,8 +46,8 @@
     {
       "name": "group_colour",
       "type": "ordinal",
-      "domain": ["Nursing and midwifery", "Medicine", "Allied health", "Oral health", "Paramedicine", "First Nations health"],
-      "range": ["#0b6257", "#4479a1", "#5b8f84", "#2f8a8f", "#b6533c", "#d0a13b"]
+      "domain": ["Nursing and midwifery", "Medicine", "Allied and other professions"],
+      "range": ["#0b6257", "#4479a1", "#5b8f84"]
     }
   ],
   "marks": [
@@ -70,7 +70,7 @@
           "x": {"field": "x0"}, "y": {"field": "y0"}, "x2": {"field": "x1"}, "y2": {"field": "y1"},
           "stroke": {"value": "#fffdf7"}, "strokeWidth": {"value": 1.5},
           "fill": {"scale": "group_colour", "field": "category"},
-          "tooltip": {"signal": "{'Profession': datum.id, 'Headcount': format(datum.headcount, ',')}"}
+          "tooltip": {"signal": "{'Profession': datum.label, 'Headcount': format(datum.headcount, ','), 'Includes': datum.members && datum.members.length ? datum.members : 'Individual profession'}"}
         },
         "update": {"opacity": {"value": 0.94}},
         "hover": {"opacity": {"value": 1}, "strokeWidth": {"value": 3}}
@@ -99,9 +99,9 @@
       "encode": {
         "enter": {
           "x": {"signal": "datum.x0 + 10"}, "y": {"signal": "datum.y0 + 10"},
-          "text": {"signal": "datum.id === 'Medical Practitioners' ? 'Medical\\npractitioners' : datum.id === 'Occupational Therapists' ? 'Occupational\\ntherapists' : datum.label"},
+          "text": {"signal": "datum.id === 'Medical Practitioners' ? 'Medical\\npractitioners' : datum.id === 'Occupational Therapists' ? 'Occupational\\ntherapists' : datum.id === 'Dental Practitioners' ? 'Dental\\npractitioners' : datum.id === 'Paramedicine Practitioners' ? 'Paramedicine\\npractitioners' : datum.id === 'Other smaller professions' ? 'Other smaller\\nprofessions' : datum.label"},
           "font": {"value": "DM Sans, Arial, sans-serif"}, "fontSize": {"value": 12.5}, "fontWeight": {"value": 700},
-          "fill": {"signal": "datum.category === 'First Nations health' ? '#173f3a' : '#ffffff'"},
+          "fill": {"value": "#ffffff"},
           "lineBreak": {"value": "\n"}, "lineHeight": {"value": 16}, "baseline": {"value": "top"}
         },
         "update": {"opacity": {"signal": "datum.x1 - datum.x0 > 95 && datum.y1 - datum.y0 > 70 ? 1 : 0"}}
@@ -113,10 +113,10 @@
       "encode": {
         "enter": {
           "x": {"signal": "datum.x0 + 10"},
-          "y": {"signal": "datum.y0 + (datum.id === 'Medical Practitioners' || datum.id === 'Occupational Therapists' ? 48 : 31)"},
+          "y": {"signal": "datum.y0 + (datum.id === 'Medical Practitioners' || datum.id === 'Occupational Therapists' || datum.id === 'Dental Practitioners' || datum.id === 'Paramedicine Practitioners' || datum.id === 'Other smaller professions' ? 48 : 31)"},
           "text": {"signal": "format(datum.headcount, ',')"},
           "font": {"value": "DM Sans, Arial, sans-serif"}, "fontSize": {"value": 11.5},
-          "fill": {"signal": "datum.category === 'First Nations health' ? '#355d57' : '#e8f4f0'"}, "baseline": {"value": "top"}
+          "fill": {"value": "#e8f4f0"}, "baseline": {"value": "top"}
         },
         "update": {"opacity": {"signal": "datum.x1 - datum.x0 > 95 && datum.y1 - datum.y0 > 82 ? 1 : 0"}}
       }

@@ -6,16 +6,16 @@ These files are compact, human-readable extracts prepared for the Data Visualisa
 |---|---|---|
 | `national_trend_2020_2024.csv` | Annual headcount by profession, used for trend, bump and connected-dot charts | Health Workforce Data national summary |
 | `national_metrics_2024.csv` | 2024 headcount, full-time-equivalent count, age and average total hours | Health Workforce Data national summary |
-| `treemap_2024.csv` | Hierarchical 2024 headcount input for the treemap | Derived from national metrics |
+| `treemap_2024.csv` | Hierarchical 2024 headcount input for the treemap; professions below 20,000 are disclosed within an aggregated “Other smaller professions” leaf | Derived from national metrics |
 | `state_workforce_2024.csv` | 2024 headcount and full-time-equivalent count by profession and jurisdiction | Health Workforce Data state summary |
 | `state_rates_2024.csv` | Wide, human-readable full-time-equivalent-per-100,000 table used by the interactive choropleth | Derived from state workforce full-time-equivalent counts and Australian Bureau of Statistics population |
-| `state_metadata.csv` | Australian Bureau of Statistics population, geographic coordinates and cartogram layout positions | Australian Bureau of Statistics population; coordinates and layout prepared for this project |
+| `state_metadata.csv` | Australian Bureau of Statistics population, geographic coordinates, direct-label positions and cartogram layout positions | Australian Bureau of Statistics population; coordinates and layout prepared for this project |
 | `remoteness_2024.csv` | Headcount, full-time-equivalent count, age and hours by profession and remoteness area | Health Workforce Data remoteness summary |
 | `australia-states.geojson` | State and territory boundaries | `rowanhogan/australian-states` on GitHub |
 
 ## Important interpretation notes
 
-- `NP` means a value was not published for confidentiality. In the prepared CSV it is left blank, not replaced with zero.
+- `Not published` means a value was withheld for confidentiality. In the prepared CSV it is left blank, not replaced with zero.
 - The workforce dataset concerns registered professionals reported as employed in Australia; it is not a count of every healthcare occupation.
 - National, state and remoteness totals may not reconcile exactly because of confidentiality, missing location information and differing classification coverage.
 - State full-time-equivalent workers per 100,000 residents is calculated as `full-time-equivalent count / December 2024 population × 100,000`.

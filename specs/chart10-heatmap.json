@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "Heatmap comparing each profession's relative full-time-equivalent workforce availability across Australian states and territories, with actual rates printed in every published cell.",
   "width": "container",
-  "height": 540,
+  "height": 560,
   "autosize": {"type": "fit", "contains": "padding", "resize": true},
   "data": {
     "url": "data/state_workforce_2024.csv",
@@ -33,11 +33,11 @@
       "sort": ["New South Wales", "Victoria", "Queensland", "South Australia", "Western Australia", "Tasmania", "Australian Capital Territory", "Northern Territory"],
       "axis": {
         "labelAngle": 0,
-        "orient": "top",
+        "orient": "bottom",
         "tickSize": 0,
         "labelLimit": 160,
         "labelLineHeight": 14,
-        "labelPadding": 22,
+        "labelPadding": 10,
         "labelExpr": "datum.label === 'New South Wales' ? ['New', 'South', 'Wales'] : datum.label === 'South Australia' ? ['South', 'Australia'] : datum.label === 'Western Australia' ? ['Western', 'Australia'] : datum.label === 'Australian Capital Territory' ? ['Australian', 'Capital', 'Territory'] : datum.label === 'Northern Territory' ? ['Northern', 'Territory'] : datum.label"
       }
     },

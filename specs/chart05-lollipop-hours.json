@@ -5,7 +5,10 @@
   "height": 500,
   "autosize": {"type": "fit", "contains": "padding", "resize": true},
   "data": {"url": "data/national_metrics_2024.csv"},
-  "transform": [{"filter": "datum.profession !== 'Total'"}],
+  "transform": [
+    {"filter": "datum.profession !== 'Total'"},
+    {"calculate": "datum.profession === 'Paramedicine Practitioners' ? 'Paramedicine' : 'Other professions'", "as": "highlight_group"}
+  ],
   "layer": [
     {
       "mark": {"type": "rule", "stroke": "#9fb5af", "strokeWidth": 3},
@@ -31,8 +34,14 @@
         "x": {"field": "average_hours", "type": "quantitative", "scale": {"domain": [0, 48]}},
         "y": {"field": "profession", "type": "nominal", "sort": {"field": "average_hours", "order": "descending"}},
         "color": {
-          "condition": {"test": "datum.profession === 'Paramedicine Practitioners'", "value": "#b6533c"},
-          "value": "#0b6257"
+          "field": "highlight_group",
+          "type": "nominal",
+          "title": null,
+          "scale": {
+            "domain": ["Paramedicine", "Other professions"],
+            "range": ["#cc79a7", "#5b8f84"]
+          },
+          "legend": {"orient": "bottom", "columns": 2, "symbolType": "circle", "labelLimit": 200}
         },
         "tooltip": [
           {"field": "profession", "title": "Profession"},
@@ -53,6 +62,7 @@
   ],
   "config": {
     "view": {"stroke": null},
-    "axis": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 13, "gridColor": "#e2eae7", "domainColor": "#8ba29d"}
+    "axis": {"labelFont": "DM Sans", "titleFont": "DM Sans", "labelFontSize": 12, "titleFontSize": 13, "gridColor": "#e2eae7", "domainColor": "#8ba29d"},
+    "legend": {"labelFont": "DM Sans", "labelFontSize": 12}
   }
 }

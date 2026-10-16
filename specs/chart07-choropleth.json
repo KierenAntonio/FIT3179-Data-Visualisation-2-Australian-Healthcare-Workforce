@@ -13,21 +13,10 @@
         "input": "select",
         "name": "Profession: ",
         "options": [
-          "All professions",
-          "Nurses and Midwives",
-          "Medical Practitioners",
-          "Physiotherapists",
-          "Psychologists",
-          "Pharmacists",
-          "Occupational Therapists",
-          "Dental Practitioners",
-          "Paramedicine Practitioners",
-          "Medical Radiation Practitioners",
-          "Optometrists",
-          "Chiropractors",
-          "Podiatrists",
-          "Chinese Medicine Practitioners",
-          "Osteopaths",
+          "All professions", "Nurses and Midwives", "Medical Practitioners", "Physiotherapists",
+          "Psychologists", "Pharmacists", "Occupational Therapists", "Dental Practitioners",
+          "Paramedicine Practitioners", "Medical Radiation Practitioners", "Optometrists",
+          "Chiropractors", "Podiatrists", "Chinese Medicine Practitioners", "Osteopaths",
           "Aboriginal and Torres Strait Islander Health Practitioners"
         ]
       }
@@ -46,25 +35,11 @@
             "data": {"url": "data/state_rates_2024.csv"},
             "key": "state",
             "fields": [
-              "state",
-              "state_code",
-              "population",
-              "All professions",
-              "Nurses and Midwives",
-              "Medical Practitioners",
-              "Physiotherapists",
-              "Psychologists",
-              "Pharmacists",
-              "Occupational Therapists",
-              "Dental Practitioners",
-              "Paramedicine Practitioners",
-              "Medical Radiation Practitioners",
-              "Optometrists",
-              "Chiropractors",
-              "Podiatrists",
-              "Chinese Medicine Practitioners",
-              "Osteopaths",
-              "Aboriginal and Torres Strait Islander Health Practitioners"
+              "state", "population", "All professions", "Nurses and Midwives", "Medical Practitioners",
+              "Physiotherapists", "Psychologists", "Pharmacists", "Occupational Therapists",
+              "Dental Practitioners", "Paramedicine Practitioners", "Medical Radiation Practitioners",
+              "Optometrists", "Chiropractors", "Podiatrists", "Chinese Medicine Practitioners",
+              "Osteopaths", "Aboriginal and Torres Strait Islander Health Practitioners"
             ]
           }
         },
@@ -84,6 +59,31 @@
           {"field": "fte_per_100k", "title": "Full-time-equivalent workers per 100,000 residents", "format": ",.1f"},
           {"field": "population", "title": "2024 population", "format": ","}
         ]
+      }
+    },
+    {
+      "data": {"url": "data/state_metadata.csv"},
+      "mark": {
+        "type": "text", "fontSize": 9.5, "fontWeight": 700,
+        "lineBreak": "|", "lineHeight": 11,
+        "color": "#173f3a", "stroke": "#fffdf7", "strokeWidth": 3
+      },
+      "encoding": {
+        "longitude": {"field": "map_label_longitude", "type": "quantitative"},
+        "latitude": {"field": "map_label_latitude", "type": "quantitative"},
+        "text": {"field": "map_label"}
+      }
+    },
+    {
+      "data": {"url": "data/state_metadata.csv"},
+      "mark": {
+        "type": "text", "fontSize": 9.5, "fontWeight": 700,
+        "lineBreak": "|", "lineHeight": 11, "color": "#173f3a"
+      },
+      "encoding": {
+        "longitude": {"field": "map_label_longitude", "type": "quantitative"},
+        "latitude": {"field": "map_label_latitude", "type": "quantitative"},
+        "text": {"field": "map_label"}
       }
     }
   ],

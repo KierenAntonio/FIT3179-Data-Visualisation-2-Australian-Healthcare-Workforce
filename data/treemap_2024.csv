@@ -1,23 +1,14 @@
-id,parent,headcount,label,category,group_total
-All healthcare workers,,0,All healthcare workers,All healthcare workers,757517
-Nursing and midwifery,All healthcare workers,0,Nursing and midwifery,Nursing and midwifery,409794
-Nurses and Midwives,Nursing and midwifery,409794,Nurses and midwives,Nursing and midwifery,
-Medicine,All healthcare workers,0,Medicine,Medicine,122116
-Medical Practitioners,Medicine,122116,Medical practitioners,Medicine,
-Allied health,All healthcare workers,0,Allied health,Allied health,178860
-Chiropractors,Allied health,5794,Chiropractors,Allied health,
-Chinese Medicine Practitioners,Allied health,4124,Chinese medicine practitioners,Allied health,
-Medical Radiation Practitioners,Allied health,17925,Medical radiation practitioners,Allied health,
-Occupational Therapists,Allied health,29124,Occupational therapists,Allied health,
-Optometrists,Allied health,6523,Optometrists,Allied health,
-Osteopaths,Allied health,3158,Osteopaths,Allied health,
-Pharmacists,Allied health,31095,Pharmacists,Allied health,
-Physiotherapists,Allied health,38703,Physiotherapists,Allied health,
-Podiatrists,Allied health,5543,Podiatrists,Allied health,
-Psychologists,Allied health,36871,Psychologists,Allied health,
-Oral health,All healthcare workers,0,Oral health,Oral health,24512
-Dental Practitioners,Oral health,24512,Dental practitioners,Oral health,
-Paramedicine,All healthcare workers,0,Paramedicine,Paramedicine,21487
-Paramedicine Practitioners,Paramedicine,21487,Paramedicine practitioners,Paramedicine,
-First Nations health,All healthcare workers,0,First Nations health,First Nations health,748
-Aboriginal and Torres Strait Islander Health Practitioners,First Nations health,748,Aboriginal and Torres Strait Islander health practitioners,First Nations health,
+id,parent,headcount,label,category,group_total,members
+All healthcare workers,,0,All healthcare workers,All healthcare workers,757517,
+Nursing and midwifery,All healthcare workers,0,Nursing and midwifery,Nursing and midwifery,409794,
+Nurses and Midwives,Nursing and midwifery,409794,Nurses and midwives,Nursing and midwifery,,
+Medicine,All healthcare workers,0,Medicine,Medicine,122116,
+Medical Practitioners,Medicine,122116,Medical practitioners,Medicine,,
+Allied and other professions,All healthcare workers,0,Allied and other professions,Allied and other professions,225607,
+Physiotherapists,Allied and other professions,38703,Physiotherapists,Allied and other professions,,
+Psychologists,Allied and other professions,36871,Psychologists,Allied and other professions,,
+Pharmacists,Allied and other professions,31095,Pharmacists,Allied and other professions,,
+Occupational Therapists,Allied and other professions,29124,Occupational therapists,Allied and other professions,,
+Dental Practitioners,Allied and other professions,24512,Dental practitioners,Allied and other professions,,
+Paramedicine Practitioners,Allied and other professions,21487,Paramedicine practitioners,Allied and other professions,,
+Other smaller professions,Allied and other professions,43815,Other smaller professions,Allied and other professions,,Aboriginal and Torres Strait Islander Health Practitioners; chiropractors; Chinese medicine practitioners; medical radiation practitioners; optometrists; osteopaths; podiatrists

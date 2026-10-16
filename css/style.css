@@ -114,10 +114,12 @@ h3 {
 }
 
 h1 {
-  max-width: 900px;
+  max-width: 100%;
   margin-bottom: 0.65rem;
-  font-size: clamp(3rem, 8vw, 6.4rem);
+  font-size: clamp(3.2rem, 4.3vw, 4rem);
   letter-spacing: -0.045em;
+  text-wrap: nowrap;
+  white-space: nowrap;
 }
 
 h2 {
@@ -342,11 +344,11 @@ h3 {
   border-radius: 50%;
 }
 
-.chart-legend__swatch--nursing { background: #0b6257; }
-.chart-legend__swatch--medical { background: #4479a1; }
-.chart-legend__swatch--paramedicine { background: #b6533c; }
-.chart-legend__swatch--first-nations { background: #d0a13b; }
-.chart-legend__swatch--allied { background: #77a99e; }
+.chart-legend__swatch--nursing { background: #0072b2; }
+.chart-legend__swatch--medical { background: #e69f00; }
+.chart-legend__swatch--paramedicine { background: #cc79a7; }
+.chart-legend__swatch--first-nations { background: #4d4d4d; }
+.chart-legend__swatch--allied { background: #009e73; }
 
 .chart {
   width: 100%;
@@ -535,6 +537,12 @@ figcaption strong {
 }
 
 @media (max-width: 900px) {
+  .hero h1 {
+    max-width: 760px;
+    text-wrap: balance;
+    white-space: normal;
+  }
+
   .chart-grid--two,
   .methodology,
   .footer-grid {

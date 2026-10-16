@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Dorling-style cartogram with states and territories represented as circles sized by healthcare workforce headcount.",
+  "description": "Dorling cartogram with states and territories replaced by circles sized by healthcare workforce headcount and arranged approximately like Australia.",
   "width": "container",
   "height": 480,
   "autosize": {"type": "fit", "contains": "padding", "resize": true},
@@ -30,6 +30,15 @@
     {"calculate": "datum.fte > 0 ? datum.fte / datum.population * 100000 : null", "as": "fte_per_100k"}
   ],
   "layer": [
+    {
+      "mark": {"type": "rule", "stroke": "#9eb1ac", "strokeWidth": 1.3, "opacity": 0.8},
+      "encoding": {
+        "x": {"field": "cartogram_x", "type": "quantitative", "axis": null, "scale": {"domain": [0, 7]}},
+        "y": {"field": "cartogram_y", "type": "quantitative", "axis": null, "scale": {"domain": [0, 6.8], "reverse": true}},
+        "x2": {"field": "label_x"},
+        "y2": {"field": "label_y"}
+      }
+    },
     {
       "mark": {"type": "circle", "opacity": 0.88, "stroke": "#fffdf7", "strokeWidth": 2},
       "encoding": {

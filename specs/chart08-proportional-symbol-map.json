@@ -12,7 +12,13 @@
       "bind": {
         "input": "select",
         "name": "Profession: ",
-        "options": ["All professions","Nurses and Midwives","Medical Practitioners","Physiotherapists","Psychologists","Pharmacists","Occupational Therapists","Dental Practitioners","Paramedicine Practitioners","Medical Radiation Practitioners","Optometrists","Chiropractors","Podiatrists","Chinese Medicine Practitioners","Osteopaths","Aboriginal and Torres Strait Islander Health Practitioners"]
+        "options": [
+          "All professions", "Nurses and Midwives", "Medical Practitioners", "Physiotherapists",
+          "Psychologists", "Pharmacists", "Occupational Therapists", "Dental Practitioners",
+          "Paramedicine Practitioners", "Medical Radiation Practitioners", "Optometrists",
+          "Chiropractors", "Podiatrists", "Chinese Medicine Practitioners", "Osteopaths",
+          "Aboriginal and Torres Strait Islander Health Practitioners"
+        ]
       }
     }
   ],
@@ -37,14 +43,12 @@
           }
         }
       ],
-      "mark": {"type": "circle", "color": "#d97757", "opacity": 0.76, "stroke": "#7d3d2a", "strokeWidth": 1.1},
+      "mark": {"type": "circle", "color": "#d97757", "opacity": 0.72, "stroke": "#7d3d2a", "strokeWidth": 1.1},
       "encoding": {
         "longitude": {"field": "longitude", "type": "quantitative"},
         "latitude": {"field": "latitude", "type": "quantitative"},
         "size": {
-          "field": "headcount",
-          "type": "quantitative",
-          "title": "Headcount",
+          "field": "headcount", "type": "quantitative", "title": "Headcount",
           "scale": {"type": "sqrt", "range": [90, 6800]},
           "legend": {"orient": "bottom", "format": ",.0f", "values": [50000, 100000, 200000]}
         },
@@ -54,6 +58,31 @@
           {"field": "headcount", "title": "Headcount", "format": ","},
           {"field": "fte", "title": "Total full-time equivalent", "format": ","}
         ]
+      }
+    },
+    {
+      "data": {"url": "data/state_metadata.csv"},
+      "mark": {
+        "type": "text", "fontSize": 9.5, "fontWeight": 700,
+        "lineBreak": "|", "lineHeight": 11,
+        "color": "#173f3a", "stroke": "#fffdf7", "strokeWidth": 3
+      },
+      "encoding": {
+        "longitude": {"field": "map_label_longitude", "type": "quantitative"},
+        "latitude": {"field": "map_label_latitude", "type": "quantitative"},
+        "text": {"field": "map_label"}
+      }
+    },
+    {
+      "data": {"url": "data/state_metadata.csv"},
+      "mark": {
+        "type": "text", "fontSize": 9.5, "fontWeight": 700,
+        "lineBreak": "|", "lineHeight": 11, "color": "#173f3a"
+      },
+      "encoding": {
+        "longitude": {"field": "map_label_longitude", "type": "quantitative"},
+        "latitude": {"field": "map_label_latitude", "type": "quantitative"},
+        "text": {"field": "map_label"}
       }
     }
   ],

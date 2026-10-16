@@ -1,9 +1,9 @@
-state,state_code,population,longitude,latitude,cartogram_x,cartogram_y,label_x,label_y
-New South Wales,NSW,8545100,147.0,-32.2,5.25,3.20,5.75,2.55
-Victoria,VIC,7011100,144.8,-37.0,4.35,4.50,4.15,5.25
-Queensland,QLD,5618800,145.0,-22.5,4.75,1.50,5.20,0.85
-South Australia,SA,1891700,135.8,-30.0,2.75,3.25,2.55,4.05
-Western Australia,WA,3008700,121.6,-25.0,0.90,2.65,0.90,3.55
-Tasmania,TAS,575800,146.6,-42.0,4.75,5.70,4.75,6.40
-Northern Territory,NT,262200,133.4,-19.5,2.75,1.00,2.75,0.35
-Australian Capital Territory,ACT,481700,149.0,-35.5,6.20,4.10,6.10,4.90
+state,state_code,population,longitude,latitude,cartogram_x,cartogram_y,label_x,label_y,map_label_longitude,map_label_latitude,map_label
+New South Wales,NSW,8545100,147.0,-32.2,5.25,3.20,5.75,2.55,151.5,-31.5,New South|Wales
+Victoria,VIC,7011100,144.8,-37.0,4.35,4.50,4.15,5.25,141.5,-39.0,Victoria
+Queensland,QLD,5618800,145.0,-22.5,4.75,1.50,5.20,0.85,145.0,-22.5,Queensland
+South Australia,SA,1891700,135.8,-30.0,2.75,3.25,2.55,4.05,135.0,-30.0,South|Australia
+Western Australia,WA,3008700,121.6,-25.0,0.90,2.65,0.90,3.55,121.6,-25.0,Western|Australia
+Tasmania,TAS,575800,146.6,-42.0,4.75,5.70,4.75,6.40,148.0,-44.5,Tasmania
+Northern Territory,NT,262200,133.4,-19.5,2.75,1.00,2.75,0.35,133.4,-19.5,Northern|Territory
+Australian Capital Territory,ACT,481700,149.0,-35.5,6.20,4.10,6.10,4.90,157.0,-37.2,Australian Capital|Territory
